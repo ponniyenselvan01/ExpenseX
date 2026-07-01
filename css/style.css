@@ -1,0 +1,55 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Root Variables */
+:root {
+
+    /* Brand Colors */
+    --primary: #5B5FEF;
+    --secondary: #7C4DFF;
+    --accent: #00C896;
+
+    /* Status Colors */
+    --success: #2ECC71;
+    --warning: #F4B400;
+    --danger: #FF5A5F;
+
+    /* Background */
+    --background: #F5F7FB;
+
+    /* Cards */
+    --card: #FFFFFF;
+
+    /* Text */
+    --text: #111827;
+
+    /* Border */
+    --border: #E5E7EB;
+
+    /* Radius */
+    --radius: 18px;
+
+    /* Shadow */
+    --shadow: 0 10px 30px rgba(0, 0, 0, .08);
+
+    /* Animation */
+    --transition: .3s ease;
+}
+
+/* Reset */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+
+    font-family: 'Inter', sans-serif;
+
+    background: var(--background);
+
+    color: var(--text);
+
+}
