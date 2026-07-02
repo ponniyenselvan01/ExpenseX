@@ -1,10 +1,16 @@
 .sidebar {
 
-    width: 260px;
+    width: 280px;
 
-    background: #ffffffcc;
+    margin: 20px;
 
-    backdrop-filter: blur(20px);
+    border-radius: 28px;
+
+    background: rgba(255, 255, 255, .55);
+
+    backdrop-filter: blur(30px);
+
+    box-shadow: 0 20px 45px rgba(0, 0, 0, .08);
 
     padding: 30px;
 
@@ -14,23 +20,25 @@
 
     justify-content: space-between;
 
-    border-right: 1px solid #e5e7eb;
+    border: 1px solid rgba(255, 255, 255, .6);
 
 }
 
 .logo {
 
-    font-size: 26px;
+    font-size: 30px;
 
     font-weight: 700;
-
-    margin-bottom: 40px;
 
     display: flex;
 
     align-items: center;
 
-    gap: 10px;
+    gap: 14px;
+
+    margin-bottom: 45px;
+
+    color: #5B5FEF;
 
 }
 
@@ -46,35 +54,41 @@
 
 .menu a {
 
-    padding: 15px;
-
-    border-radius: 14px;
-
     display: flex;
 
     align-items: center;
 
-    gap: 14px;
+    gap: 15px;
 
-    transition: .3s;
+    padding: 16px 18px;
 
-    font-weight: 500;
+    border-radius: 16px;
+
+    font-weight: 600;
+
+    transition: .35s;
 
 }
 
 .menu a:hover {
 
-    background: #5B5FEF;
+    background: linear-gradient(135deg, #5B5FEF, #7C4DFF);
 
     color: white;
+
+    transform: translateX(8px);
+
+    box-shadow: 0 15px 30px rgba(91, 95, 239, .3);
 
 }
 
 .menu .active {
 
-    background: #5B5FEF;
+    background: linear-gradient(135deg, #5B5FEF, #7C4DFF);
 
     color: white;
+
+    box-shadow: 0 15px 30px rgba(91, 95, 239, .3);
 
 }
 
@@ -82,9 +96,7 @@
 
     flex: 1;
 
-    padding: 30px;
-
-    background: #f5f7fb;
+    padding: 35px;
 
 }
 
@@ -136,13 +148,17 @@
 
 .dashboard {
 
-    background: white;
+    background: rgba(255, 255, 255, .65);
 
-    padding: 40px;
+    backdrop-filter: blur(30px);
 
-    border-radius: 20px;
+    padding: 50px;
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+    border-radius: 28px;
+
+    box-shadow: 0 20px 45px rgba(0, 0, 0, .08);
+
+    border: 1px solid rgba(255, 255, 255, .5);
 
 }
 
@@ -150,25 +166,31 @@
 
     position: fixed;
 
-    right: 30px;
+    right: 35px;
 
-    bottom: 30px;
+    bottom: 35px;
 
-    width: 65px;
+    width: 70px;
 
-    height: 65px;
+    height: 70px;
 
     border-radius: 50%;
 
-    background: #5B5FEF;
+    background: linear-gradient(135deg, #5B5FEF, #7C4DFF);
 
     color: white;
 
-    font-size: 22px;
+    font-size: 24px;
 
-    box-shadow: 0 15px 40px rgba(91, 95, 239, .35);
+    box-shadow: 0 20px 40px rgba(91, 95, 239, .35);
 
-    transition: .3s;
+    transition: .35s;
+
+}
+
+.fab:hover {
+
+    transform: translateY(-8px) scale(1.08);
 
 }
 

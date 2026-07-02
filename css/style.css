@@ -48,9 +48,15 @@ body {
 
     font-family: 'Inter', sans-serif;
 
-    background: var(--background);
+    background: #eef3ff;
 
     color: var(--text);
+
+    overflow-x: hidden;
+
+    position: relative;
+
+    min-height: 100vh;
 
 }
 
@@ -95,5 +101,70 @@ a {
     text-decoration: none;
 
     color: inherit;
+
+}
+
+body::before,
+body::after {
+
+    content: "";
+
+    position: fixed;
+
+    border-radius: 50%;
+
+    filter: blur(120px);
+
+    opacity: .6;
+
+    z-index: -1;
+
+    animation: floatBlob 12s infinite alternate;
+
+}
+
+body::before {
+
+    width: 350px;
+
+    height: 350px;
+
+    background: #6c63ff;
+
+    top: -120px;
+
+    left: -100px;
+
+}
+
+body::after {
+
+    width: 420px;
+
+    height: 420px;
+
+    background: #00C896;
+
+    right: -150px;
+
+    bottom: -150px;
+
+    animation-duration: 16s;
+
+}
+
+@keyframes floatBlob {
+
+    from {
+
+        transform: translateY(0px);
+
+    }
+
+    to {
+
+        transform: translateY(60px);
+
+    }
 
 }
