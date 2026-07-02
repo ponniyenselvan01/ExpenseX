@@ -31,16 +31,95 @@
 
 <body>
 
-    <div id="app">
+    <div class="app-container">
+
+        <!-- Sidebar -->
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                💰 <span>ExpenseX</span>
+            </div>
+
+            <nav class="menu">
+
+                <a href="#" class="active">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="#">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+
+                <a href="#">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Transactions</span>
+                </a>
+
+                <a href="#">
+                    <i class="fa-solid fa-bullseye"></i>
+                    <span>Goals</span>
+                </a>
+
+                <a href="#">
+                    <i class="fa-solid fa-calendar"></i>
+                    <span>Calendar</span>
+                </a>
+
+                <a href="#">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <!-- Main Content -->
+
+        <main class="main-content">
+
+            <header class="topbar">
+
+                <h1>Dashboard</h1>
+
+                <div class="top-actions">
+
+                    <button class="theme-btn">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+
+                    <img src="https://ui-avatars.com/api/?name=ExpenseX" alt="Profile">
+
+                </div>
+
+            </header>
+
+            <section class="dashboard">
+
+                <h2>Welcome to ExpenseX 👋</h2>
+
+                <p>
+                    Your smart personal finance dashboard starts here.
+                </p>
+
+            </section>
+
+        </main>
 
     </div>
 
+    <button class="fab">
+
+        <i class="fa-solid fa-plus"></i>
+
+    </button>
+
     <script src="js/utils.js"></script>
-
     <script src="js/storage.js"></script>
-
     <script src="js/notifications.js"></script>
-
     <script src="js/app.js"></script>
 
 </body>

@@ -1,0 +1,179 @@
+.sidebar {
+
+    width: 260px;
+
+    background: #ffffffcc;
+
+    backdrop-filter: blur(20px);
+
+    padding: 30px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    border-right: 1px solid #e5e7eb;
+
+}
+
+.logo {
+
+    font-size: 26px;
+
+    font-weight: 700;
+
+    margin-bottom: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+.menu {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+.menu a {
+
+    padding: 15px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    transition: .3s;
+
+    font-weight: 500;
+
+}
+
+.menu a:hover {
+
+    background: #5B5FEF;
+
+    color: white;
+
+}
+
+.menu .active {
+
+    background: #5B5FEF;
+
+    color: white;
+
+}
+
+.main-content {
+
+    flex: 1;
+
+    padding: 30px;
+
+    background: #f5f7fb;
+
+}
+
+.topbar {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 40px;
+
+}
+
+.top-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+.top-actions img {
+
+    width: 45px;
+
+    height: 45px;
+
+    border-radius: 50%;
+
+}
+
+.theme-btn {
+
+    width: 45px;
+
+    height: 45px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+
+}
+
+.dashboard {
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+
+}
+
+.fab {
+
+    position: fixed;
+
+    right: 30px;
+
+    bottom: 30px;
+
+    width: 65px;
+
+    height: 65px;
+
+    border-radius: 50%;
+
+    background: #5B5FEF;
+
+    color: white;
+
+    font-size: 22px;
+
+    box-shadow: 0 15px 40px rgba(91, 95, 239, .35);
+
+    transition: .3s;
+
+}
+
+.fab:hover {
+
+    transform: scale(1.1);
+
+}

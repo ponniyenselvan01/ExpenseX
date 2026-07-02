@@ -53,3 +53,47 @@ body {
     color: var(--text);
 
 }
+
+/* Layout */
+
+.app-container {
+
+    display: flex;
+
+    min-height: 100vh;
+
+}
+
+/* Remove button border */
+
+button {
+
+    border: none;
+
+    outline: none;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+}
+
+/* Images */
+
+img {
+
+    max-width: 100%;
+
+    display: block;
+
+}
+
+/* Links */
+
+a {
+
+    text-decoration: none;
+
+    color: inherit;
+
+}
