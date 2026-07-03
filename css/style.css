@@ -48,13 +48,15 @@ body {
 
     font-family: 'Inter', sans-serif;
 
-    background: #eef3ff;
+    background: var(--bg);
 
     color: var(--text);
 
-    overflow-x: hidden;
+    transition:
+        background .35s,
+        color .35s;
 
-    position: relative;
+    overflow-x: hidden;
 
     min-height: 100vh;
 

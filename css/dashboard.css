@@ -1,27 +1,14 @@
 .sidebar {
-
     width: 280px;
-
     margin: 20px;
-
     border-radius: 28px;
-
-    background: rgba(255, 255, 255, .55);
-
+    background: var(--sidebar);
     backdrop-filter: blur(30px);
-
     box-shadow: 0 20px 45px rgba(0, 0, 0, .08);
-
     padding: 30px;
-
     display: flex;
-
     flex-direction: column;
-
-    justify-content: space-between;
-
     border: 1px solid rgba(255, 255, 255, .6);
-
 }
 
 .logo {
@@ -196,7 +183,7 @@
 
 .welcome-card {
 
-    background: rgba(255, 255, 255, .65);
+    background: var(--surface);
 
     padding: 35px;
 
@@ -222,7 +209,7 @@
 
 .stat-card {
 
-    background: rgba(255, 255, 255, .82);
+    background: var(--surface);
 
     padding: 28px;
 
@@ -230,8 +217,7 @@
 
     transition: .35s;
 
-    box-shadow:
-        0 10px 35px rgba(0, 0, 0, .05);
+    box-shadow: var(--shadow);
 
     border: 1px solid rgba(255, 255, 255, .45);
 
@@ -295,7 +281,7 @@
 
 .glass-card {
 
-    background: rgba(255, 255, 255, .78);
+    background: var(--surface-glass);
 
     backdrop-filter: blur(24px);
 
@@ -444,5 +430,157 @@ td {
 .budget-item {
 
     margin-bottom: 20px;
+
+}
+
+/* ===========================
+   Modal
+=========================== */
+
+.modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, .45);
+
+    backdrop-filter: blur(10px);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: .35s;
+
+    z-index: 999;
+
+}
+
+.modal-overlay.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+.expense-modal {
+
+    width: 450px;
+
+    background: var(--surface);
+
+    border-radius: 24px;
+
+    padding: 30px;
+
+    box-shadow: var(--shadow);
+
+    animation: popup .3s ease;
+
+}
+
+@keyframes popup {
+
+    from {
+
+        transform: translateY(20px) scale(.95);
+
+        opacity: 0;
+
+    }
+
+    to {
+
+        transform: translateY(0) scale(1);
+
+        opacity: 1;
+
+    }
+
+}
+
+.modal-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+
+}
+
+.input-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin-bottom: 20px;
+
+}
+
+.input-group label {
+
+    margin-bottom: 8px;
+
+    font-weight: 600;
+
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    border: 1px solid var(--border);
+
+    background: transparent;
+
+    color: var(--text);
+
+    font-size: 15px;
+
+}
+
+.save-btn {
+
+    width: 100%;
+
+    padding: 16px;
+
+    border-radius: 14px;
+
+    background: #5B5FEF;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    margin-top: 10px;
+
+}
+
+.close-modal {
+
+    background: none;
+
+    font-size: 22px;
+
+    color: var(--text);
 
 }
