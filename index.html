@@ -115,42 +115,42 @@
                     <div class="stat-card">
                         <i class="fa-solid fa-wallet"></i>
                         <h4>Total Balance</h4>
-                        <h2>₹52,800</h2>
+                        <h2 id="totalBalance">₹0</h2>
                         <span>▲ +12%</span>
                     </div>
 
                     <div class="stat-card">
                         <i class="fa-solid fa-arrow-trend-up"></i>
                         <h4>Income</h4>
-                        <h2>₹78,000</h2>
+                        <h2 id="totalIncome">₹0</h2>
                         <span>▲ +8%</span>
                     </div>
 
                     <div class="stat-card">
                         <i class="fa-solid fa-arrow-trend-down"></i>
                         <h4>Expenses</h4>
-                        <h2>₹25,200</h2>
+                        <h2 id="totalExpense">₹0</h2>
                         <span>▼ -3%</span>
                     </div>
 
                     <div class="stat-card">
                         <i class="fa-solid fa-piggy-bank"></i>
                         <h4>Savings</h4>
-                        <h2>₹18,600</h2>
+                        <h2 id="totalSavings">₹0</h2>
                         <span>▲ +16%</span>
                     </div>
 
                     <div class="stat-card">
                         <i class="fa-solid fa-chart-line"></i>
                         <h4>Cash Flow</h4>
-                        <h2>Positive</h2>
+                        <h2 id="cashFlow">₹0</h2>
                         <span>Healthy</span>
                     </div>
 
                     <div class="stat-card">
                         <i class="fa-solid fa-bullseye"></i>
                         <h4>Budget Left</h4>
-                        <h2>₹11,500</h2>
+                        <h2 id="budgetLeft">₹0</h2>
                         <span>65%</span>
                     </div>
 
@@ -202,42 +202,17 @@
                         <table>
 
                             <thead>
-
                                 <tr>
-
                                     <th>Category</th>
                                     <th>Amount</th>
+                                    <th>Date</th>
                                     <th>Status</th>
-
+                                    <th>Action</th>
                                 </tr>
-
                             </thead>
 
-                            <tbody>
+                            <tbody id="transactionTable">
 
-                                <tr>
-
-                                    <td>🍔 Food</td>
-                                    <td>₹550</td>
-                                    <td>Completed</td>
-
-                                </tr>
-
-                                <tr>
-
-                                    <td>🚕 Transport</td>
-                                    <td>₹220</td>
-                                    <td>Completed</td>
-
-                                </tr>
-
-                                <tr>
-
-                                    <td>🎮 Entertainment</td>
-                                    <td>₹950</td>
-                                    <td>Completed</td>
-
-                                </tr>
 
                             </tbody>
 
@@ -370,6 +345,7 @@
     <script src="js/utils.js"></script>
     <script src="js/storage.js"></script>
     <script src="js/notifications.js"></script>
+    <script src="js/dashboard.js"></script>
     <script src="js/app.js"></script>
     <script src="js/charts.js"></script>
 

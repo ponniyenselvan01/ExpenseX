@@ -110,9 +110,12 @@ form.addEventListener("submit", function (e) {
     };
 
     addTransaction(transaction);
+    loadDashboard();
 
     showToast("Expense Added Successfully!");
     form.reset();
 
     modal.classList.remove("active");
 });
+
+loadDashboard();
