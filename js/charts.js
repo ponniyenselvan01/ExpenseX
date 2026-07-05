@@ -36,32 +36,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (pieCtx) {
 
+        const transactions = getTransactions();
+
+        const categoryTotals = {};
+
+        transactions.forEach(item => {
+
+            if (!categoryTotals[item.category]) {
+
+                categoryTotals[item.category] = 0;
+
+            }
+
+            categoryTotals[item.category] += Number(item.amount);
+
+        });
+
+        const labels = Object.keys(categoryTotals);
+
+        const data = Object.values(categoryTotals);
+
+        const colors = [
+            "#5B5FEF",
+            "#00C896",
+            "#FFB703",
+            "#FF5A5F",
+            "#7C4DFF",
+            "#00B8D9",
+            "#8BC34A"
+        ];
+
         new Chart(pieCtx, {
 
             type: "doughnut",
 
             data: {
-                labels: ["Food", "Travel", "Shopping", "Bills", "Health"],
+
+                labels,
+
                 datasets: [{
-                    data: [35, 20, 18, 15, 12],
-                    backgroundColor: [
-                        "#5B5FEF",
-                        "#00C896",
-                        "#FFB703",
-                        "#FF5A5F",
-                        "#7C4DFF"
-                    ]
+
+                    data,
+
+                    backgroundColor: colors.slice(0, labels.length)
+
                 }]
+
             },
 
             options: {
+
                 responsive: true,
+
                 maintainAspectRatio: false,
+
                 cutout: "65%"
+
             }
 
         });
 
     }
-
 });
