@@ -70,7 +70,7 @@ document.addEventListener("keydown", (e) => {
 // =====================
 
 const form = document.getElementById("expenseForm");
-
+let editingId = null;
 form.addEventListener("submit", function (e) {
 
     e.preventDefault();
@@ -95,21 +95,41 @@ form.addEventListener("submit", function (e) {
 
     }
 
-    const transaction = {
+    if (editingId) {
 
-        id: Date.now(),
+        updateTransaction({
 
-        amount,
+            id: editingId,
 
-        category: document.getElementById("category").value,
+            amount,
 
-        note: document.getElementById("note").value,
+            category: document.getElementById("category").value,
 
-        date: new Date().toLocaleDateString()
+            note: document.getElementById("note").value,
 
-    };
+            date: new Date().toLocaleDateString()
 
-    addTransaction(transaction);
+        });
+
+        editingId = null;
+
+    } else {
+
+        addTransaction({
+
+            id: Date.now(),
+
+            amount,
+
+            category: document.getElementById("category").value,
+
+            note: document.getElementById("note").value,
+
+            date: new Date().toLocaleDateString()
+
+        });
+
+    }
     loadDashboard();
 
     showToast("Expense Added Successfully!");

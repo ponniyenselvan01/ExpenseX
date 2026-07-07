@@ -24,27 +24,32 @@ function loadTransactionTable(transactions) {
 
         table.innerHTML += `
 <tr>
-    <td>🔥 TEST ${item.category}</td>
+    <td>🔥 ${item.category}</td>
     <td><strong>₹${item.amount}</strong></td>
     <td>${item.date}</td>
     <td>
         <span class="status completed">Completed</span>
     </td>
-    <td>
-        <button class="action-btn edit">
-            <i class="fa-solid fa-pen"></i>
-        </button>
+   <td>
+    <button
+        class="action-btn edit"
+        onclick="editTransaction(${item.id})">
+        <i class="fa-solid fa-pen"></i>
+    </button>
 
-        <button class="action-btn delete">
-            <i class="fa-solid fa-trash"></i>
-        </button>
-    </td>
+    <button
+        class="action-btn delete"
+        onclick="deleteTransaction(${item.id})">
+        <i class="fa-solid fa-trash"></i>
+    </button>
+</td>
 </tr>
 `;
 
     });
 
 }
+
 
 // ==========================
 // Dashboard Statistics
