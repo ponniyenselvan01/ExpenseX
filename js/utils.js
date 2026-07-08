@@ -25,3 +25,36 @@ function animateValue(elementId, start, end, duration = 800) {
     requestAnimationFrame(update);
 
 }
+// ==========================
+// Animate Number
+// ==========================
+
+function animateNumber(elementId, endValue, duration = 1000) {
+
+    const element = document.getElementById(elementId);
+
+    let start = 0;
+
+    const increment = endValue / (duration / 16);
+
+    function update() {
+
+        start += increment;
+
+        if (start >= endValue) {
+
+            element.textContent = endValue;
+
+            return;
+
+        }
+
+        element.textContent = Math.floor(start);
+
+        requestAnimationFrame(update);
+
+    }
+
+    update();
+
+}

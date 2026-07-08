@@ -272,3 +272,179 @@
     cursor: pointer;
 
 }
+
+/* ==========================
+   Export Button
+========================== */
+
+#exportCSV {
+
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #5B5FEF;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition: .3s;
+
+}
+
+#exportCSV:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 20px rgba(91, 95, 239, .3);
+
+}
+
+#exportCSV i {
+
+    margin-right: 8px;
+
+}
+
+/* ==========================
+   Financial Health
+========================== */
+
+.health-card {
+
+    text-align: center;
+
+}
+
+.health-score {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+}
+
+.circle {
+
+    position: relative;
+
+    width: 170px;
+
+    height: 170px;
+
+}
+
+.circle svg {
+
+    transform: rotate(-90deg);
+
+}
+
+.bg-circle {
+
+    fill: none;
+
+    stroke: #e5e7eb;
+
+    stroke-width: 12;
+
+}
+
+.progress-circle {
+
+    fill: none;
+
+    stroke: #5B5FEF;
+
+    stroke-width: 12;
+
+    stroke-linecap: round;
+
+    stroke-dasharray: 440;
+
+    stroke-dashoffset: 440;
+
+    transition: 1s ease;
+
+}
+
+.score-text {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+}
+
+.score-text h2 {
+
+    font-size: 40px;
+
+    margin: 0;
+
+}
+
+.score-text span {
+
+    color: #64748b;
+
+}
+
+#healthStatus {
+
+    margin-top: 15px;
+
+    font-weight: 600;
+
+}
+
+/* ==========================
+   Smart Insights
+========================== */
+
+.insights-card {
+
+    margin-top: 20px;
+
+}
+
+#insightsList {
+
+    list-style: none;
+
+    padding: 15px;
+
+}
+
+#insightsList li {
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+
+    font-size: 15px;
+
+    line-height: 1.5;
+
+}
+
+#insightsList li:last-child {
+
+    border-bottom: none;
+
+}

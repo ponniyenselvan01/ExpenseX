@@ -17,6 +17,10 @@ function loadDashboard() {
     setupSorting(transactions);
 
     setupExportCSV();
+
+    updateFinancialHealth(transactions);
+
+    updateInsights(transactions);
 }
 // ==========================
 // Transaction Table
@@ -236,5 +240,217 @@ function setupExportCSV() {
         showToast("CSV exported successfully!");
 
     };
+
+}
+// ==========================
+// Financial Health
+// ==========================
+
+function updateFinancialHealth(transactions) {
+
+    let totalExpense = 0;
+
+    transactions.forEach(item => {
+
+        totalExpense += Number(item.amount);
+
+    });
+
+    const totalIncome = 50000;
+
+    let score = Math.max(
+        0,
+        Math.min(
+            100,
+            Math.round((1 - totalExpense / totalIncome) * 100)
+        )
+    );
+
+    animateNumber("healthScore", score);
+
+    const circle = document.getElementById("healthProgress");
+    if (score >= 80) {
+
+        circle.style.stroke = "#22c55e";
+
+    }
+
+    else if (score >= 60) {
+
+        circle.style.stroke = "#facc15";
+
+    }
+
+    else if (score >= 40) {
+
+        circle.style.stroke = "#fb923c";
+
+    }
+
+    else {
+
+        circle.style.stroke = "#ef4444";
+
+    }
+
+    const circumference = 440;
+
+    let current = circumference;
+
+    const target =
+        circumference - (score / 100) * circumference;
+
+    function animateCircle() {
+
+        current -= 6;
+
+        if (current <= target) {
+
+            circle.style.strokeDashoffset = target;
+
+            return;
+
+        }
+
+        circle.style.strokeDashoffset = current;
+
+        requestAnimationFrame(animateCircle);
+
+    }
+
+    circle.style.strokeDashoffset = circumference;
+
+    requestAnimationFrame(animateCircle);
+
+    const status = document.getElementById("healthStatus");
+
+    if (score >= 80) {
+
+        status.textContent = "🟢 Excellent";
+
+    }
+
+    else if (score >= 60) {
+
+        status.textContent = "🟡 Good";
+
+    }
+
+    else if (score >= 40) {
+
+        status.textContent = "🟠 Average";
+
+    }
+
+    else {
+
+        status.textContent = "🔴 Poor";
+
+    }
+
+}
+// ==========================
+// Smart Insights
+// ==========================
+
+function updateInsights(transactions) {
+
+    const list = document.getElementById("insightsList");
+
+    if (!list) return;
+
+    list.innerHTML = "";
+
+    if (transactions.length === 0) {
+
+        list.innerHTML =
+            "<li>💸 No transactions yet.</li>";
+
+        return;
+
+    }
+
+    let totalExpense = 0;
+
+    const categoryTotals = {};
+
+    transactions.forEach(item => {
+
+        totalExpense += Number(item.amount);
+
+        categoryTotals[item.category] =
+            (categoryTotals[item.category] || 0) + Number(item.amount);
+
+    });
+
+    let highestCategory = "";
+
+    let highestAmount = 0;
+
+    for (const category in categoryTotals) {
+
+        if (categoryTotals[category] > highestAmount) {
+
+            highestAmount = categoryTotals[category];
+
+            highestCategory = category;
+
+        }
+
+    }
+
+    const budget = 20000;
+
+    const budgetUsed =
+        ((totalExpense / budget) * 100).toFixed(1);
+
+    list.innerHTML += `
+        <li>💰 Total spent: <strong>₹${totalExpense.toLocaleString()}</strong></li>
+    `;
+
+    list.innerHTML += `
+        <li>🔥 Highest spending: <strong>${highestCategory}</strong></li>
+    `;
+
+    list.innerHTML += `
+        <li>📊 Budget used: <strong>${budgetUsed}%</strong></li>
+    `;
+
+    if (totalExpense <= budget) {
+
+        list.innerHTML += `
+            <li>🟢 Great! You're under budget.</li>
+        `;
+
+    } else {
+
+        list.innerHTML += `
+            <li>🔴 Warning! Budget exceeded.</li>
+        `;
+
+    }
+
+}
+// Recommendation
+
+if (highestCategory) {
+
+    list.innerHTML += `
+        <li>💡 Try reducing <strong>${highestCategory}</strong> spending to improve your financial health.</li>
+    `;
+
+}
+
+if (budgetUsed > 90) {
+
+    list.innerHTML += `
+        <li>⚠️ You're using almost all of your monthly budget.</li>
+    `;
+
+} else if (budgetUsed < 50) {
+
+    list.innerHTML += `
+        <li>🎉 Excellent! You still have plenty of budget remaining.</li>
+    `;
 
 }
