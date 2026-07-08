@@ -15,6 +15,8 @@ function loadDashboard() {
     setupCategoryFilter(transactions);
 
     setupSorting(transactions);
+
+    setupExportCSV();
 }
 // ==========================
 // Transaction Table
@@ -179,6 +181,59 @@ function setupSorting(transactions) {
         }
 
         loadTransactionTable(sorted);
+
+    };
+
+}
+
+// ==========================
+// Export CSV
+// ==========================
+
+function setupExportCSV() {
+
+    const exportBtn = document.getElementById("exportCSV");
+
+    if (!exportBtn) return;
+
+    exportBtn.onclick = function () {
+
+        const transactions = getTransactions();
+
+        if (transactions.length === 0) {
+
+            showToast("No transactions to export!", "error");
+
+            return;
+
+        }
+
+        let csv =
+            "Category,Amount,Date,Note\n";
+
+        transactions.forEach(item => {
+
+            csv += `${item.category},${item.amount},${item.date},"${item.note}"\n`;
+
+        });
+
+        const blob = new Blob([csv], {
+            type: "text/csv"
+        });
+
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+
+        a.href = url;
+
+        a.download = "ExpenseX_Transactions.csv";
+
+        a.click();
+
+        URL.revokeObjectURL(url);
+
+        showToast("CSV exported successfully!");
 
     };
 
