@@ -195,72 +195,106 @@
 
                             <h3>Recent Transactions</h3>
 
-                            <button>View All</button>
+                            <<div class="table-actions">
+
+                                <input type="text" id="searchTransaction" placeholder="🔍 Search expenses...">
+
+                                <select id="categoryFilter">
+
+                                    <option value="all">All Categories</option>
+
+                                    <option value="Food">Food</option>
+
+                                    <option value="Transport">Transport</option>
+
+                                    <option value="Shopping">Shopping</option>
+
+                                    <option value="Travel">Travel</option>
+
+                                    <option value="Bills">Bills</option>
+
+                                    <option value="Health">Health</option>
+
+                                    <option value="Others">Others</option>
+
+                                </select>
+
+                                <select id="sortTransactions">
+
+                                    <option value="newest">Newest First</option>
+
+                                    <option value="oldest">Oldest First</option>
+
+                                </select>
+
+                                <button>View All</button>
 
                         </div>
-
-                        <table>
-
-                            <thead>
-                                <tr>
-                                    <th>Category</th>
-                                    <th>Amount</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-
-                            <tbody id="transactionTable">
-
-
-                            </tbody>
-
-                        </table>
 
                     </div>
 
-                    <!-- Budget Progress -->
+                    <table>
 
-                    <div class="glass-card budget-card">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
 
-                        <div class="card-header">
+                        <tbody id="transactionTable">
 
-                            <h3>Budget Progress</h3>
 
-                        </div>
+                        </tbody>
 
-                        <div class="budget-item">
+                    </table>
 
-                            <span>Food</span>
+                </div>
 
-                            <progress value="70" max="100"></progress>
+                <!-- Budget Progress -->
 
-                        </div>
+                <div class="glass-card budget-card">
 
-                        <div class="budget-item">
+                    <div class="card-header">
 
-                            <span>Shopping</span>
+                        <h3>Budget Progress</h3>
 
-                            <progress value="45" max="100"></progress>
+                    </div>
 
-                        </div>
+                    <div class="budget-item">
 
-                        <div class="budget-item">
+                        <span>Food</span>
 
-                            <span>Travel</span>
+                        <progress value="70" max="100"></progress>
 
-                            <progress value="85" max="100"></progress>
+                    </div>
 
-                        </div>
+                    <div class="budget-item">
+
+                        <span>Shopping</span>
+
+                        <progress value="45" max="100"></progress>
+
+                    </div>
+
+                    <div class="budget-item">
+
+                        <span>Travel</span>
+
+                        <progress value="85" max="100"></progress>
 
                     </div>
 
                 </div>
 
-            </section>
+    </div>
 
-        </main>
+    </section>
+
+    </main>
 
     </div>
 

@@ -6,10 +6,15 @@ function loadDashboard() {
 
     const transactions = getTransactions();
 
-    loadTransactionTable(transactions);
-
     updateDashboardStats(transactions);
 
+    loadTransactionTable(transactions);
+
+    setupSearch(transactions);
+
+    setupCategoryFilter(transactions);
+
+    setupSorting(transactions);
 }
 // ==========================
 // Transaction Table
@@ -86,5 +91,95 @@ function updateDashboardStats(transactions) {
 
     document.getElementById("budgetLeft").textContent =
         `₹${Math.max(0, budgetLeft).toLocaleString()}`;
+
+}
+
+// ==========================
+// Search Transactions
+// ==========================
+
+function setupSearch(transactions) {
+
+    const searchInput = document.getElementById("searchTransaction");
+
+    if (!searchInput) return;
+
+    searchInput.oninput = function () {
+
+        const keyword = this.value.toLowerCase();
+
+        const filtered = transactions.filter(item =>
+
+            item.category.toLowerCase().includes(keyword) ||
+
+            item.note.toLowerCase().includes(keyword) ||
+
+            String(item.amount).includes(keyword)
+
+        );
+
+        loadTransactionTable(filtered);
+
+    };
+
+}
+
+// ==========================
+// Category Filter
+// ==========================
+
+function setupCategoryFilter(transactions) {
+
+    const filter = document.getElementById("categoryFilter");
+
+    if (!filter) return;
+
+    filter.onchange = function () {
+
+        if (this.value === "all") {
+
+            loadTransactionTable(transactions);
+
+            return;
+
+        }
+
+        const filtered = transactions.filter(item =>
+            item.category === this.value
+        );
+
+        loadTransactionTable(filtered);
+
+    };
+
+}
+
+// ==========================
+// Sort Transactions
+// ==========================
+
+function setupSorting(transactions) {
+
+    const sort = document.getElementById("sortTransactions");
+
+    if (!sort) return;
+
+    sort.onchange = function () {
+
+        const sorted = [...transactions];
+
+        if (this.value === "newest") {
+
+            sorted.sort((a, b) => b.id - a.id);
+
+        } else {
+
+            sorted.sort((a, b) => a.id - b.id);
+
+        }
+
+        loadTransactionTable(sorted);
+
+    };
 
 }

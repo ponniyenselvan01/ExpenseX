@@ -188,3 +188,87 @@
     background: #6366f1;
     color: white;
 }
+
+/* ==========================
+   Transaction Search
+========================== */
+
+.table-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+#searchTransaction {
+
+    width: 240px;
+
+    padding: 10px 15px;
+
+    border: none;
+
+    outline: none;
+
+    border-radius: 10px;
+
+    background: #f4f6ff;
+
+    font-size: 14px;
+
+    transition: .3s;
+
+}
+
+#searchTransaction:focus {
+
+    box-shadow: 0 0 0 3px rgba(91, 95, 239, .15);
+
+}
+
+#categoryFilter {
+
+    padding: 10px 15px;
+
+    border: none;
+
+    outline: none;
+
+    border-radius: 10px;
+
+    background: #f4f6ff;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+#categoryFilter:focus {
+
+    box-shadow: 0 0 0 3px rgba(91, 95, 239, .15);
+
+}
+
+#sortTransactions {
+
+    padding: 10px 15px;
+
+    border: none;
+
+    outline: none;
+
+    border-radius: 10px;
+
+    background: #f4f6ff;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+}
