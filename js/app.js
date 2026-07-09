@@ -107,8 +107,7 @@ form.addEventListener("submit", function (e) {
 
             note: document.getElementById("note").value,
 
-            date: new Date().toLocaleDateString()
-
+            date: new Date().toISOString().split("T")[0]
         });
 
         editingId = null;

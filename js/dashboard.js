@@ -32,6 +32,8 @@ function loadDashboard() {
     updateFinancialHealth(transactions);
 
     updateInsights(transactions);
+
+    updateAnalyticsCards(transactions);
 }
 // ==========================
 // Transaction Table
@@ -78,7 +80,7 @@ function loadTransactionTable(transactions) {
     transactions.forEach(item => {
 
         table.innerHTML += `
-<tr>
+<tr class="fade-in">
     <td>🔥 ${item.category}</td>
     <td><strong>₹${item.amount}</strong></td>
     <td>${item.date}</td>
@@ -119,7 +121,8 @@ function updateDashboardStats(transactions) {
     });
 
     // Demo income
-    const totalIncome = 50000;
+    const totalIncome =
+        Number(localStorage.getItem("income")) || 50000;
 
     // Calculations
     const totalBalance = totalIncome - totalExpense;
@@ -442,6 +445,26 @@ function updateInsights(transactions) {
         }
 
     }
+    const budget = 20000;
+
+    const budgetUsed = (totalExpense / budget) * 100;
+    list.innerHTML += `
+<li>💰 Total Spent:
+<strong>₹${totalExpense.toLocaleString()}</strong>
+</li>
+`;
+
+    list.innerHTML += `
+<li>🔥 Highest Spending:
+<strong>${highestCategory}</strong>
+</li>
+`;
+
+    list.innerHTML += `
+<li>📊 Budget Used:
+<strong>${budgetUsed.toFixed(1)}%</strong>
+</li>
+`;
     if (totalExpense <= budget) {
 
         list.innerHTML += `
@@ -517,3 +540,113 @@ document
         showToast("Transaction deleted!");
 
     });
+
+// ==========================
+// Analytics Cards
+// ==========================
+
+function updateAnalyticsCards(transactions) {
+    // Total Transactions
+    document.getElementById("transactionCountCard").textContent =
+        transactions.length;
+
+    // Average Expense
+    const total = transactions.reduce(
+        (sum, item) => sum + Number(item.amount),
+        0
+    );
+
+    const average =
+        transactions.length === 0
+            ? 0
+            : Math.round(total / transactions.length);
+
+    document.getElementById("averageExpenseCard").textContent =
+        `₹${average.toLocaleString()}`;
+
+    // Highest Category
+    const categoryTotals = {};
+
+    transactions.forEach(item => {
+
+        if (!categoryTotals[item.category]) {
+
+            categoryTotals[item.category] = 0;
+
+        }
+
+        categoryTotals[item.category] += Number(item.amount);
+
+    });
+
+    let highestCategory = "-";
+
+    let highestAmount = 0;
+
+    for (const category in categoryTotals) {
+
+        if (categoryTotals[category] > highestAmount) {
+
+            highestAmount = categoryTotals[category];
+
+            highestCategory = category;
+
+        }
+
+    }
+
+    document.getElementById("highestCategoryCard").textContent =
+        highestCategory;
+    // ==========================
+    // Largest Expense
+    // ==========================
+
+    let largestExpense = 0;
+
+    transactions.forEach(item => {
+
+        if (Number(item.amount) > largestExpense) {
+
+            largestExpense = Number(item.amount);
+
+        }
+
+    });
+
+    document.getElementById("largestExpenseCard").textContent =
+        `₹${largestExpense.toLocaleString()}`;
+
+
+    // ==========================
+    // Smallest Expense
+    // ==========================
+
+    let smallestExpense =
+        transactions.length > 0
+            ? Number(transactions[0].amount)
+            : 0;
+
+    transactions.forEach(item => {
+
+        if (Number(item.amount) < smallestExpense) {
+
+            smallestExpense = Number(item.amount);
+
+        }
+
+    });
+
+    document.getElementById("smallestExpenseCard").textContent =
+        `₹${smallestExpense.toLocaleString()}`;
+
+
+    // ==========================
+    // Categories Used
+    // ==========================
+
+    const uniqueCategories =
+        [...new Set(transactions.map(item => item.category))];
+
+    document.getElementById("categoriesUsedCard").textContent =
+        uniqueCategories.length;
+}
