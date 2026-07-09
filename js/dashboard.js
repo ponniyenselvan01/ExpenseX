@@ -1,3 +1,14 @@
+let deleteId = null;
+
+function deleteTransaction(id) {
+
+    deleteId = id;
+
+    document
+        .getElementById("deleteModal")
+        .classList.add("active");
+
+}
 // ==========================
 // Dashboard
 // ==========================
@@ -30,6 +41,39 @@ function loadTransactionTable(transactions) {
     const table = document.getElementById("transactionTable");
 
     table.innerHTML = "";
+    if (transactions.length === 0) {
+
+        table.innerHTML = `
+        <tr class="fade-in">
+            <td colspan="5" class="empty-state">
+
+                <div class="empty-box">
+
+                    <div class="empty-icon">📭</div>
+
+                    <h3>No Transactions Yet</h3>
+
+                    <p>
+                        Start by adding your first expense.
+                    </p>
+
+                    <button
+                        class="empty-btn"
+                        onclick="document.querySelector('.fab').click()">
+
+                        + Add Expense
+
+                    </button>
+
+                </div>
+
+            </td>
+        </tr>
+    `;
+
+        return;
+
+    }
 
     transactions.forEach(item => {
 
@@ -398,59 +442,78 @@ function updateInsights(transactions) {
         }
 
     }
-
-    const budget = 20000;
-
-    const budgetUsed =
-        ((totalExpense / budget) * 100).toFixed(1);
-
-    list.innerHTML += `
-        <li>💰 Total spent: <strong>₹${totalExpense.toLocaleString()}</strong></li>
-    `;
-
-    list.innerHTML += `
-        <li>🔥 Highest spending: <strong>${highestCategory}</strong></li>
-    `;
-
-    list.innerHTML += `
-        <li>📊 Budget used: <strong>${budgetUsed}%</strong></li>
-    `;
-
     if (totalExpense <= budget) {
 
         list.innerHTML += `
-            <li>🟢 Great! You're under budget.</li>
-        `;
+        <li>🟢 Great! You're under budget.</li>
+    `;
 
     } else {
 
         list.innerHTML += `
-            <li>🔴 Warning! Budget exceeded.</li>
-        `;
+        <li>🔴 Warning! Budget exceeded.</li>
+    `;
+
+    }
+
+    // Recommendation
+
+    if (highestCategory) {
+
+        list.innerHTML += `
+        <li>💡 Try reducing <strong>${highestCategory}</strong> spending to improve your financial health.</li>
+    `;
+
+    }
+
+    if (budgetUsed > 90) {
+
+        list.innerHTML += `
+        <li>⚠️ You're using almost all of your monthly budget.</li>
+    `;
+
+    } else if (budgetUsed < 50) {
+
+        list.innerHTML += `
+        <li>🎉 Excellent! You still have plenty of budget remaining.</li>
+    `;
 
     }
 
 }
-// Recommendation
 
-if (highestCategory) {
+document
+    .getElementById("cancelDelete")
+    .addEventListener("click", () => {
 
-    list.innerHTML += `
-        <li>💡 Try reducing <strong>${highestCategory}</strong> spending to improve your financial health.</li>
-    `;
+        document
+            .getElementById("deleteModal")
+            .classList.remove("active");
 
-}
+        deleteId = null;
 
-if (budgetUsed > 90) {
+    });
 
-    list.innerHTML += `
-        <li>⚠️ You're using almost all of your monthly budget.</li>
-    `;
+document
+    .getElementById("confirmDelete")
+    .addEventListener("click", () => {
 
-} else if (budgetUsed < 50) {
+        const transactions = getTransactions();
 
-    list.innerHTML += `
-        <li>🎉 Excellent! You still have plenty of budget remaining.</li>
-    `;
+        const updated = transactions.filter(
+            item => item.id !== deleteId
+        );
 
-}
+        saveTransactions(updated);
+
+        document
+            .getElementById("deleteModal")
+            .classList.remove("active");
+
+        deleteId = null;
+
+        loadDashboard();
+
+        showToast("Transaction deleted!");
+
+    });

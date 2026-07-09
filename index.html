@@ -112,42 +112,42 @@
 
                 <div class="stats-grid">
 
-                    <div class="stat-card">
+                    <div class="stat-card fade-in">
                         <i class="fa-solid fa-wallet"></i>
                         <h4>Total Balance</h4>
                         <h2 id="totalBalance">₹0</h2>
                         <span>▲ +12%</span>
                     </div>
 
-                    <div class="stat-card">
+                    <div class="stat-card fade-in">
                         <i class="fa-solid fa-arrow-trend-up"></i>
                         <h4>Income</h4>
                         <h2 id="totalIncome">₹0</h2>
                         <span>▲ +8%</span>
                     </div>
 
-                    <div class="stat-card">
+                    <div class="stat-card fade-in">
                         <i class="fa-solid fa-arrow-trend-down"></i>
                         <h4>Expenses</h4>
                         <h2 id="totalExpense">₹0</h2>
                         <span>▼ -3%</span>
                     </div>
 
-                    <div class="stat-card">
+                    <div class="stat-card fade-in">
                         <i class="fa-solid fa-piggy-bank"></i>
                         <h4>Savings</h4>
                         <h2 id="totalSavings">₹0</h2>
                         <span>▲ +16%</span>
                     </div>
 
-                    <div class="stat-card">
+                    <div class="stat-card fade-in">
                         <i class="fa-solid fa-chart-line"></i>
                         <h4>Cash Flow</h4>
                         <h2 id="cashFlow">₹0</h2>
                         <span>Healthy</span>
                     </div>
 
-                    <div class="stat-card">
+                    <div class="stat-card fade-in">
                         <i class="fa-solid fa-bullseye"></i>
                         <h4>Budget Left</h4>
                         <h2 id="budgetLeft">₹0</h2>
@@ -159,7 +159,7 @@
 
                     <!-- Spending Trend -->
 
-                    <div class="glass-card chart-card">
+                    <div class="glass-card chart-card fade-in">
 
                         <div class="card-header">
 
@@ -432,6 +432,37 @@
 
     <!-- Toast Container -->
     <div id="toastContainer"></div>
+    <!-- Delete Confirmation Modal -->
+
+    <div class="modal-overlay" id="deleteModal">
+
+        <div class="delete-modal">
+
+            <div class="delete-icon">
+                🗑️
+            </div>
+
+            <h2>Delete Transaction?</h2>
+
+            <p>
+                This action cannot be undone.
+            </p>
+
+            <div class="delete-actions">
+
+                <button id="cancelDelete">
+                    Cancel
+                </button>
+
+                <button id="confirmDelete">
+                    Delete
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -32,26 +32,6 @@ function addTransaction(transaction) {
 
 }
 
-// Delete transaction
-function deleteTransaction(id) {
-
-    const confirmDelete = confirm(
-        "Are you sure you want to delete this expense?"
-    );
-
-    if (!confirmDelete) return;
-
-    const transactions = getTransactions();
-
-    const updated = transactions.filter(item => item.id !== id);
-
-    saveTransactions(updated);
-
-    loadDashboard();
-
-    showToast("Expense deleted successfully!", "success");
-
-}
 
 function updateTransaction(updatedTransaction) {
 
