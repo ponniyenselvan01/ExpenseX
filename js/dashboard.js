@@ -34,6 +34,8 @@ function loadDashboard() {
     updateInsights(transactions);
 
     updateAnalyticsCards(transactions);
+
+    loadCharts();
 }
 // ==========================
 // Transaction Table
