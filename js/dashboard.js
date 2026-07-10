@@ -35,7 +35,7 @@ function loadDashboard() {
 
     updateAnalyticsCards(transactions);
 
-    loadCharts();
+    // loadCharts();
 }
 // ==========================
 // Transaction Table
@@ -122,15 +122,17 @@ function updateDashboardStats(transactions) {
         totalExpense += Number(item.amount);
     });
 
-    // Demo income
-    const totalIncome =
-        Number(localStorage.getItem("income")) || 50000;
+    const totalIncome = getIncome();
 
-    // Calculations
     const totalBalance = totalIncome - totalExpense;
-    const totalSavings = totalBalance * 0.25;
-    const cashFlow = totalBalance;
-    const budgetLeft = 20000 - totalExpense;
+    const totalSavings = totalBalance;
+    const budget = getBudget();
+    const budgetLeft = budget - totalExpense;
+
+    const budgetPercent =
+        budget > 0
+            ? Math.round((budgetLeft / budget) * 100)
+            : 0;
 
     // Update Cards
     animateValue("totalIncome", 0, totalIncome);
@@ -147,8 +149,10 @@ function updateDashboardStats(transactions) {
     document.getElementById("budgetLeft").textContent =
         `₹${Math.max(0, budgetLeft).toLocaleString()}`;
 
-}
+    document.getElementById("budgetPercent").textContent =
+        `${budgetPercent}%`;
 
+}
 // ==========================
 // Search Transactions
 // ==========================
@@ -305,8 +309,7 @@ function updateFinancialHealth(transactions) {
 
     });
 
-    const totalIncome = 50000;
-
+    const totalIncome = getIncome();
     let score = Math.max(
         0,
         Math.min(
@@ -447,7 +450,7 @@ function updateInsights(transactions) {
         }
 
     }
-    const budget = 20000;
+    const budget = getBudget();
 
     const budgetUsed = (totalExpense / budget) * 100;
     list.innerHTML += `

@@ -72,3 +72,31 @@ function editTransaction(id) {
     modal.classList.add("active");
 
 }
+
+// ==========================
+// Income & Budget
+// ==========================
+
+function getIncome() {
+
+    return Number(localStorage.getItem("income")) || 50000;
+
+}
+
+function saveIncome(income) {
+
+    localStorage.setItem("income", income);
+
+}
+
+function getBudget() {
+
+    return Number(localStorage.getItem("budget")) || 20000;
+
+}
+
+function saveBudget(budget) {
+
+    localStorage.setItem("budget", budget);
+
+}

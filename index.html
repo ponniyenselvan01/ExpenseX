@@ -87,6 +87,11 @@
 
                 <div class="top-actions">
 
+                    <button id="budgetSettingsBtn" class="primary-btn">
+                        <i class="fa-solid fa-wallet"></i>
+                        Income & Budget
+                    </button>
+
                     <button class="theme-btn">
                         <i class="fa-solid fa-moon"></i>
                     </button>
@@ -151,7 +156,7 @@
                         <i class="fa-solid fa-bullseye"></i>
                         <h4>Budget Left</h4>
                         <h2 id="budgetLeft">₹0</h2>
-                        <span>65%</span>
+                        <span id="budgetPercent">0%</span>
                     </div>
 
                 </div>
@@ -506,6 +511,35 @@
 
             </div>
 
+        </div>
+
+    </div>
+    <!-- Income & Budget Modal -->
+    <div class="modal-overlay" id="budgetModal">
+
+        <div class="modal">
+
+            <span class="close-modal" id="closeBudgetModal">&times;</span>
+
+            <h2>Income & Budget</h2>
+
+            <form id="budgetForm">
+
+                <div class="form-group">
+                    <label for="monthlyIncome">Monthly Income</label>
+                    <input type="number" id="monthlyIncome" placeholder="Enter Monthly Income" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="monthlyBudget">Monthly Budget</label>
+                    <input type="number" id="monthlyBudget" placeholder="Enter Monthly Budget" required>
+                </div>
+
+                <button type="submit" class="primary-btn">
+                    Save
+                </button>
+
+            </form>
         </div>
 
     </div>

@@ -648,3 +648,77 @@
     color: #5B5FEF;
 
 }
+
+.primary-btn {
+    background: #5B5FEF;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.primary-btn:hover {
+    background: #4b4fd8;
+    transform: translateY(-2px);
+}
+
+/* ==========================
+   Income & Budget Modal
+========================== */
+
+#budgetModal .modal {
+
+    background: #222b3d;
+    width: 420px;
+    max-width: 90%;
+    padding: 30px;
+    border-radius: 18px;
+
+}
+
+#budgetForm {
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+}
+
+#budgetForm .form-group {
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+}
+
+#budgetForm label {
+
+    font-weight: 600;
+    color: #fff;
+
+}
+
+#budgetForm input {
+
+    width: 100%;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+
+}
+
+#budgetForm button {
+
+    width: 100%;
+    margin-top: 10px;
+
+}

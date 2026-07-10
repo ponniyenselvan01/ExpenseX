@@ -22,6 +22,39 @@ themeBtn.addEventListener("click", () => {
     localStorage.setItem("theme", isDark ? "dark" : "light");
 
 });
+// =====================
+// Income & Budget Modal
+// =====================
+
+const budgetBtn = document.getElementById("budgetSettingsBtn");
+const budgetModal = document.getElementById("budgetModal");
+const closeBudgetModal = document.getElementById("closeBudgetModal");
+
+if (budgetBtn && budgetModal && closeBudgetModal) {
+
+    budgetBtn.addEventListener("click", () => {
+
+        document.getElementById("monthlyIncome").value =
+            getIncome();
+
+        document.getElementById("monthlyBudget").value =
+            getBudget();
+
+        budgetModal.classList.add("active");
+
+    });
+
+    closeBudgetModal.addEventListener("click", () => {
+        budgetModal.classList.remove("active");
+    });
+
+    budgetModal.addEventListener("click", (e) => {
+        if (e.target === budgetModal) {
+            budgetModal.classList.remove("active");
+        }
+    });
+
+}
 
 // =====================
 // Expense Modal
@@ -138,3 +171,27 @@ form.addEventListener("submit", function (e) {
 });
 
 loadDashboard();
+
+const budgetForm = document.getElementById("budgetForm");
+
+budgetForm.addEventListener("submit", function (e) {
+
+    e.preventDefault();
+
+    const income =
+        Number(document.getElementById("monthlyIncome").value);
+
+    const budget =
+        Number(document.getElementById("monthlyBudget").value);
+
+    saveIncome(income);
+
+    saveBudget(budget);
+
+    budgetModal.classList.remove("active");
+
+    showToast("Financial settings saved!");
+
+    loadDashboard();
+
+});
