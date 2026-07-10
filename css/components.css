@@ -722,3 +722,163 @@
     margin-top: 10px;
 
 }
+
+#insightsList {
+
+    margin-top: 20px;
+
+    padding-left: 20px;
+
+}
+
+#insightsList li {
+
+    margin-bottom: 12px;
+
+    line-height: 1.6;
+
+    color: #d9d9d9;
+
+    font-size: 15px;
+
+}
+
+#insightsList strong {
+
+    color: #ffffff;
+
+}
+
+/* ==========================
+   Top Expenses
+========================== */
+
+.top-expenses {
+
+    margin-top: 30px;
+
+    padding: 25px;
+
+}
+
+.top-expenses h3 {
+
+    margin-bottom: 20px;
+
+    font-size: 20px;
+
+}
+
+.expense-rank {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+
+}
+
+.expense-rank:last-child {
+
+    border-bottom: none;
+
+}
+
+.rank-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+.rank-number {
+
+    width: 32px;
+
+    height: 32px;
+
+    border-radius: 50%;
+
+    background: #5B5FEF;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-weight: 700;
+
+}
+
+.rank-category {
+
+    font-weight: 600;
+
+}
+
+.rank-amount {
+
+    color: #00C896;
+
+    font-weight: 700;
+
+}
+
+/* ==========================
+   Monthly Comparison
+========================== */
+
+.monthly-comparison {
+
+    margin-top: 25px;
+
+    padding: 25px;
+
+}
+
+.monthly-comparison h3 {
+
+    margin-bottom: 20px;
+
+}
+
+.compare-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+
+}
+
+.compare-row:last-of-type {
+
+    border-bottom: none;
+
+}
+
+.comparison-message {
+
+    margin-top: 20px;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    background: rgba(91, 95, 239, .15);
+
+    font-weight: 600;
+
+}

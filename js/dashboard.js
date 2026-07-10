@@ -35,6 +35,10 @@ function loadDashboard() {
 
     updateAnalyticsCards(transactions);
 
+    updateTopExpenses(transactions);
+
+    updateMonthlyComparison(transactions);
+
     // loadCharts();
 }
 // ==========================
@@ -415,12 +419,16 @@ function updateInsights(transactions) {
 
     if (transactions.length === 0) {
 
-        list.innerHTML =
-            "<li>💸 No transactions yet.</li>";
+        list.innerHTML = `
+            <li>💸 No transactions available.</li>
+        `;
 
         return;
 
     }
+
+    const income = getIncome();
+    const budget = getBudget();
 
     let totalExpense = 0;
 
@@ -428,15 +436,22 @@ function updateInsights(transactions) {
 
     transactions.forEach(item => {
 
-        totalExpense += Number(item.amount);
+        const amount = Number(item.amount);
 
-        categoryTotals[item.category] =
-            (categoryTotals[item.category] || 0) + Number(item.amount);
+        totalExpense += amount;
+
+        if (!categoryTotals[item.category]) {
+
+            categoryTotals[item.category] = 0;
+
+        }
+
+        categoryTotals[item.category] += amount;
 
     });
 
-    let highestCategory = "";
-
+    // Highest Category
+    let highestCategory = "-";
     let highestAmount = 0;
 
     for (const category in categoryTotals) {
@@ -450,129 +465,90 @@ function updateInsights(transactions) {
         }
 
     }
-    const budget = getBudget();
 
-    const budgetUsed = (totalExpense / budget) * 100;
-    list.innerHTML += `
-<li>💰 Total Spent:
-<strong>₹${totalExpense.toLocaleString()}</strong>
-</li>
-`;
+    const budgetUsed =
+        budget > 0
+            ? ((totalExpense / budget) * 100).toFixed(1)
+            : 0;
 
+    // Total Spent
     list.innerHTML += `
-<li>🔥 Highest Spending:
-<strong>${highestCategory}</strong>
-</li>
-`;
+        <li>💰 Total Spent: <strong>₹${totalExpense.toLocaleString()}</strong></li>
+    `;
 
+    // Highest Category
     list.innerHTML += `
-<li>📊 Budget Used:
-<strong>${budgetUsed.toFixed(1)}%</strong>
-</li>
-`;
+        <li>🔥 Highest Spending: <strong>${highestCategory}</strong></li>
+    `;
+
+    // Budget Used
+    list.innerHTML += `
+        <li>📊 Budget Used: <strong>${budgetUsed}%</strong></li>
+    `;
+
+    // Budget Status
     if (totalExpense <= budget) {
 
         list.innerHTML += `
-        <li>🟢 Great! You're under budget.</li>
-    `;
+            <li>🟢 Great! You're under budget.</li>
+        `;
 
     } else {
 
         list.innerHTML += `
-        <li>🔴 Warning! Budget exceeded.</li>
-    `;
+            <li>🔴 Warning! Budget exceeded.</li>
+        `;
 
     }
 
     // Recommendation
-
-    if (highestCategory) {
-
-        list.innerHTML += `
-        <li>💡 Try reducing <strong>${highestCategory}</strong> spending to improve your financial health.</li>
+    list.innerHTML += `
+        <li>💡 Reduce <strong>${highestCategory}</strong> spending to save more.</li>
     `;
 
-    }
+    // Savings
+    const remaining = budget - totalExpense;
 
-    if (budgetUsed > 90) {
-
-        list.innerHTML += `
-        <li>⚠️ You're using almost all of your monthly budget.</li>
+    list.innerHTML += `
+        <li>💵 Budget Remaining: <strong>₹${Math.max(0, remaining).toLocaleString()}</strong></li>
     `;
-
-    } else if (budgetUsed < 50) {
-
-        list.innerHTML += `
-        <li>🎉 Excellent! You still have plenty of budget remaining.</li>
-    `;
-
-    }
 
 }
-
-document
-    .getElementById("cancelDelete")
-    .addEventListener("click", () => {
-
-        document
-            .getElementById("deleteModal")
-            .classList.remove("active");
-
-        deleteId = null;
-
-    });
-
-document
-    .getElementById("confirmDelete")
-    .addEventListener("click", () => {
-
-        const transactions = getTransactions();
-
-        const updated = transactions.filter(
-            item => item.id !== deleteId
-        );
-
-        saveTransactions(updated);
-
-        document
-            .getElementById("deleteModal")
-            .classList.remove("active");
-
-        deleteId = null;
-
-        loadDashboard();
-
-        showToast("Transaction deleted!");
-
-    });
-
-// ==========================
-// Analytics Cards
-// ==========================
-
 function updateAnalyticsCards(transactions) {
+
     // Total Transactions
     document.getElementById("transactionCountCard").textContent =
         transactions.length;
 
-    // Average Expense
-    const total = transactions.reduce(
-        (sum, item) => sum + Number(item.amount),
-        0
-    );
+    let total = 0;
 
-    const average =
-        transactions.length === 0
-            ? 0
-            : Math.round(total / transactions.length);
+    let largestExpense = 0;
 
-    document.getElementById("averageExpenseCard").textContent =
-        `₹${average.toLocaleString()}`;
+    let smallestExpense = 0;
 
-    // Highest Category
     const categoryTotals = {};
 
+    const categories = new Set();
+
     transactions.forEach(item => {
+
+        const amount = Number(item.amount);
+
+        total += amount;
+
+        categories.add(item.category);
+
+        if (amount > largestExpense) {
+
+            largestExpense = amount;
+
+        }
+
+        if (smallestExpense === 0 || amount < smallestExpense) {
+
+            smallestExpense = amount;
+
+        }
 
         if (!categoryTotals[item.category]) {
 
@@ -580,10 +556,20 @@ function updateAnalyticsCards(transactions) {
 
         }
 
-        categoryTotals[item.category] += Number(item.amount);
+        categoryTotals[item.category] += amount;
 
     });
 
+    // Average
+    const average =
+        transactions.length
+            ? Math.round(total / transactions.length)
+            : 0;
+
+    document.getElementById("averageExpenseCard").textContent =
+        `₹${average.toLocaleString()}`;
+
+    // Highest Category
     let highestCategory = "-";
 
     let highestAmount = 0;
@@ -602,56 +588,178 @@ function updateAnalyticsCards(transactions) {
 
     document.getElementById("highestCategoryCard").textContent =
         highestCategory;
-    // ==========================
+
     // Largest Expense
-    // ==========================
-
-    let largestExpense = 0;
-
-    transactions.forEach(item => {
-
-        if (Number(item.amount) > largestExpense) {
-
-            largestExpense = Number(item.amount);
-
-        }
-
-    });
-
     document.getElementById("largestExpenseCard").textContent =
         `₹${largestExpense.toLocaleString()}`;
 
-
-    // ==========================
     // Smallest Expense
-    // ==========================
+    document.getElementById("smallestExpenseCard").textContent =
+        `₹${smallestExpense.toLocaleString()}`;
 
-    let smallestExpense =
-        transactions.length > 0
-            ? Number(transactions[0].amount)
-            : 0;
+    // Categories Used
+    document.getElementById("categoriesUsedCard").textContent =
+        categories.size;
+
+}
+
+function updateTopExpenses(transactions) {
+
+    const container =
+        document.getElementById("topExpensesList");
+
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    if (transactions.length === 0) {
+
+        container.innerHTML = "<p>No transactions found.</p>";
+
+        return;
+
+    }
+
+    const sorted = [...transactions]
+        .sort((a, b) => Number(b.amount) - Number(a.amount))
+        .slice(0, 5);
+
+    sorted.forEach((item, index) => {
+
+        const date = new Date(item.date);
+
+        const formattedDate =
+            date.toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            });
+
+        container.innerHTML += `
+
+        <div class="expense-rank">
+
+            <div class="rank-left">
+
+                <div class="rank-number">
+                    ${index + 1}
+                </div>
+
+                <div>
+
+                    <div class="rank-category">
+                        ${item.category}
+                    </div>
+
+                    <small>${formattedDate}</small>
+
+                </div>
+
+            </div>
+
+            <div class="rank-amount">
+                ₹${Number(item.amount).toLocaleString()}
+            </div>
+
+        </div>
+
+    `;
+
+    });
+
+}
+
+function updateMonthlyComparison(transactions) {
+
+    const today = new Date();
+
+    const currentMonth = today.getMonth();
+    const currentYear = today.getFullYear();
+
+    let currentTotal = 0;
+    let previousTotal = 0;
 
     transactions.forEach(item => {
 
-        if (Number(item.amount) < smallestExpense) {
+        const d = new Date(item.date);
 
-            smallestExpense = Number(item.amount);
+        const amount = Number(item.amount);
+
+        if (
+            d.getMonth() === currentMonth &&
+            d.getFullYear() === currentYear
+        ) {
+
+            currentTotal += amount;
+
+        }
+
+        else if (
+
+            (
+                currentMonth === 0 &&
+                d.getMonth() === 11 &&
+                d.getFullYear() === currentYear - 1
+            )
+
+            ||
+
+            (
+                d.getMonth() === currentMonth - 1 &&
+                d.getFullYear() === currentYear
+            )
+
+        ) {
+
+            previousTotal += amount;
 
         }
 
     });
 
-    document.getElementById("smallestExpenseCard").textContent =
-        `₹${smallestExpense.toLocaleString()}`;
+    document.getElementById("currentMonthExpense").textContent =
+        `₹${currentTotal.toLocaleString()}`;
 
+    document.getElementById("previousMonthExpense").textContent =
+        `₹${previousTotal.toLocaleString()}`;
 
-    // ==========================
-    // Categories Used
-    // ==========================
+    const message =
+        document.getElementById("comparisonMessage");
 
-    const uniqueCategories =
-        [...new Set(transactions.map(item => item.category))];
+    if (previousTotal === 0) {
 
-    document.getElementById("categoriesUsedCard").textContent =
-        uniqueCategories.length;
+        message.innerHTML =
+            "📌 No expenses were recorded last month.";
+
+        return;
+
+    }
+
+    const difference =
+        currentTotal - previousTotal;
+
+    const percent =
+        ((difference / previousTotal) * 100).toFixed(1);
+
+    if (difference > 0) {
+
+        message.innerHTML =
+            `📈 Spending increased by <strong>₹${difference.toLocaleString()}</strong> (${percent}%).`;
+
+    }
+
+    else if (difference < 0) {
+
+        message.innerHTML =
+            `📉 Spending decreased by <strong>₹${Math.abs(difference).toLocaleString()}</strong> (${Math.abs(percent)}%).`;
+
+    }
+
+    else {
+
+        message.innerHTML =
+            "➖ Spending is exactly the same as last month.";
+
+    }
+
 }
