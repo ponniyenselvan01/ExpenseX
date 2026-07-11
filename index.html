@@ -2,30 +2,22 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>ExpenseX</title>
 
     <!-- Font Awesome -->
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <!-- CSS -->
-
     <link rel="stylesheet" href="css/style.css">
-
     <link rel="stylesheet" href="css/dashboard.css">
-
     <link rel="stylesheet" href="css/components.css">
-
     <link rel="stylesheet" href="css/animations.css">
-
     <link rel="stylesheet" href="css/responsive.css">
-
     <link rel="stylesheet" href="css/themes.css">
+    <link rel="icon" href="favicon.ico">
 
 </head>
 
@@ -33,8 +25,9 @@
 
     <div class="app-container">
 
-        <!-- Sidebar -->
-
+        <!-- =========================
+             Sidebar
+        ========================== -->
         <aside class="sidebar">
 
             <div class="logo">
@@ -77,10 +70,12 @@
 
         </aside>
 
-        <!-- Main Content -->
-
+        <!-- =========================
+             Main Content
+        ========================== -->
         <main class="main-content">
 
+            <!-- Top Bar -->
             <header class="topbar">
 
                 <h1>Dashboard</h1>
@@ -89,11 +84,10 @@
 
                     <button id="budgetSettingsBtn" class="primary-btn">
                         <i class="fa-solid fa-wallet"></i>
-                        Income & Budget
+                        Income &amp; Budget
                     </button>
 
-                    <button class="theme-btn">
-                        <i class="fa-solid fa-moon"></i>
+                    <button type="button" class="theme-btn"> <i class="fa-solid fa-moon"></i>
                     </button>
 
                     <img src="https://ui-avatars.com/api/?name=ExpenseX" alt="Profile">
@@ -102,18 +96,22 @@
 
             </header>
 
+            <!-- Dashboard -->
             <section class="dashboard">
 
+                <!-- Welcome -->
                 <div class="welcome-card">
 
                     <h2>Welcome back 👋</h2>
 
                     <p>
-                        Track your income, monitor expenses,
+                        Track your income, monitor your expenses,
                         and achieve your financial goals.
                     </p>
 
                 </div>
+
+                <!-- Dashboard Filters -->
                 <div class="dashboard-filters">
 
                     <button class="filter-btn active" data-filter="all">
@@ -138,6 +136,9 @@
 
                 </div>
 
+                <!-- =========================
+                     Statistics Cards
+                ========================= -->
                 <div class="stats-grid">
 
                     <div class="stat-card fade-in">
@@ -171,7 +172,7 @@
                     <div class="stat-card fade-in">
                         <i class="fa-solid fa-chart-line"></i>
                         <h4>Cash Flow</h4>
-                        <h2 id="cashFlow">₹0</h2>
+                        <h2 id="cashFlow">Positive</h2>
                         <span>Healthy</span>
                     </div>
 
@@ -183,355 +184,300 @@
                     </div>
 
                 </div>
+
+                <!-- =========================
+                     Dashboard Grid
+                ========================= -->
                 <div class="dashboard-grid">
 
-                    <!-- Spending Trend -->
-
-                    <div class="glass-card chart-card fade-in">
-
-                        <div class="card-header">
-
-                            <h3>Expense by Category</h3>
-                            <button>Monthly</button>
-
-                        </div>
-
-                        <canvas id="lineChart"></canvas>
-
-                    </div>
-
-                    <!-- Expense Categories -->
-
-                    <div class="glass-card pie-card">
-
-                        <div class="card-header">
-
-                            <h3>Expense Categories</h3>
-
-                        </div>
-
-                        <canvas id="pieChart"></canvas>
-
-                    </div>
-
-                    <!-- Recent Transactions -->
-
-                    <div class="glass-card transaction-card">
-
-                        <div class="card-header">
-
-                            <h3>Recent Transactions</h3>
-
-                            <<div class="table-actions">
-
-                                <input type="text" id="searchTransaction" placeholder="🔍 Search expenses...">
-
-                                <select id="categoryFilter">
-
-                                    <option value="all">All Categories</option>
-
-                                    <option value="Food">Food</option>
-
-                                    <option value="Transport">Transport</option>
-
-                                    <option value="Shopping">Shopping</option>
-
-                                    <option value="Travel">Travel</option>
-
-                                    <option value="Bills">Bills</option>
-
-                                    <option value="Health">Health</option>
-
-                                    <option value="Others">Others</option>
-
-                                </select>
-
-                                <select id="sortTransactions">
-
-                                    <option value="newest">Newest First</option>
-
-                                    <option value="oldest">Oldest First</option>
-
-                                </select>
-
-                                <button id="exportCSV">
-                                    <i class="fa-solid fa-file-csv"></i>
-                                    Export CSV
-                                </button>
-
-                        </div>
-
-                    </div>
-
-                    <table>
-
-                        <thead>
-                            <tr>
-                                <th>Category</th>
-                                <th>Amount</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-
-                        <tbody id="transactionTable">
-
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-                <div class="glass-card monthly-trend-card">
-
-                    <div class="card-header">
-                        <h3>
-                            <i class="fa-solid fa-chart-line"></i>
-                            Monthly Spending Trend
-                        </h3>
-                    </div>
-
-                    <div class="chart-container">
-                        <canvas id="monthlyTrendChart"></canvas>
-                    </div>
-
-                </div>
-
-                <!-- Budget Progress -->
-
-                <div class="glass-card budget-card">
-
-                    <div class="card-header">
-
-                        <h3>Budget Progress</h3>
-
-                    </div>
-                    <!-- Financial Health -->
-                    <div class="glass-card top-expenses">
-
-                        <h3>
-                            <i class="fa-solid fa-trophy"></i>
-                            Top 5 Largest Expenses
-                        </h3>
-
-
-                    </div>
-
-                    <!-- Monthly Comparison -->
-                    <div class="glass-card monthly-comparison">
-
-                        <h3>
-                            <i class="fa-solid fa-chart-line"></i>
-                            Monthly Comparison
-                        </h3>
-
-                        <div class="compare-row">
-                            <span>Current Month</span>
-                            <strong id="currentMonthExpense">₹0</strong>
-                        </div>
-
-                        <div class="compare-row">
-                            <span>Previous Month</span>
-                            <strong id="previousMonthExpense">₹0</strong>
-                        </div>
-
-                        <div id="comparisonMessage" class="comparison-message">
-                            No comparison available.
-                        </div>
-
-                    </div>
-
-                    <!-- Financial Health -->
-                    <div class="glass-card health-card">
-
-                        ...
-
-                        <div id="topExpensesList">
-
-                            <p>No transactions yet.</p>
-
-                        </div>
-
-                    </div>
-
-                    <div class="glass-card health-card">
-
-                        <div class="card-header">
-
-                            <h3>Financial Health</h3>
-
-                        </div>
-                        <!-- Smart Insights -->
-
-                        <div class="glass-card insights-card">
+                    <!-- Left Column -->
+                    <div class="left-column">
+
+                        <!-- Expense by Category -->
+                        <div class="glass-card chart-card fade-in">
 
                             <div class="card-header">
-                                <h3>💡 Smart Insights</h3>
+                                <h3>Expense by Category</h3>
+                                <button>Monthly</button>
                             </div>
 
-                            <ul id="insightsList">
-
-                                <li>Analyzing your expenses...</li>
-
-                            </ul>
-
-                        </div>
-                        <!-- Analytics Summary -->
-                        <div class="analytics-grid">
-
-                            <div class="glass-card analytics-card">
-                                <h4>Largest Expense</h4>
-                                <h2 id="largestExpenseCard">₹0</h2>
-                            </div>
-
-                            <div class="glass-card analytics-card">
-                                <h4>Smallest Expense</h4>
-                                <h2 id="smallestExpenseCard">₹0</h2>
-                            </div>
-
-                            <div class="glass-card analytics-card">
-                                <h4>Categories Used</h4>
-                                <h2 id="categoriesUsedCard">0</h2>
-                            </div>
+                            <canvas id="lineChart"></canvas>
 
                         </div>
 
-                        <div class="analytics-grid">
+                        <!-- Recent Transactions -->
+                        <div class="glass-card transaction-card">
 
-                            <div class="glass-card analytics-card">
+                            <div class="card-header">
 
-                                <h4>Highest Category</h4>
+                                <h3>Recent Transactions</h3>
 
-                                <h2 id="highestCategoryCard">-</h2>
+                                <div class="table-actions">
 
-                            </div>
+                                    <input type="text" id="searchTransaction" placeholder="🔍 Search expenses...">
 
-                            <div class="glass-card analytics-card">
+                                    <select id="categoryFilter">
+                                        <option value="all">All Categories</option>
+                                        <option value="Food">Food</option>
+                                        <option value="Transport">Transport</option>
+                                        <option value="Shopping">Shopping</option>
+                                        <option value="Travel">Travel</option>
+                                        <option value="Bills">Bills</option>
+                                        <option value="Health">Health</option>
+                                        <option value="Others">Others</option>
+                                    </select>
 
-                                <h4>Average Expense</h4>
+                                    <select id="sortTransactions">
+                                        <option value="newest">Newest First</option>
+                                        <option value="oldest">Oldest First</option>
+                                    </select>
 
-                                <h2 id="averageExpenseCard">₹0</h2>
-
-                            </div>
-
-                            <div class="glass-card analytics-card">
-
-                                <h4>Total Transactions</h4>
-
-                                <h2 id="transactionCountCard">0</h2>
-
-                            </div>
-
-                        </div>
-
-                        <div class="health-score">
-
-                            <div class="circle">
-
-                                <svg width="170" height="170">
-
-                                    <circle cx="85" cy="85" r="70" class="bg-circle">
-                                    </circle>
-
-                                    <circle cx="85" cy="85" r="70" class="progress-circle" id="healthProgress">
-                                    </circle>
-
-                                </svg>
-
-                                <div class="score-text">
-
-                                    <h2 id="healthScore">0</h2>
-
-                                    <span>/100</span>
+                                    <button id="exportCSV">
+                                        <i class="fa-solid fa-file-csv"></i>
+                                        Export CSV
+                                    </button>
 
                                 </div>
 
                             </div>
 
-                            <p id="healthStatus">
+                            <table>
 
-                                Calculating...
+                                <thead>
 
-                            </p>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="transactionTable">
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <!-- Top Expenses -->
+                        <div class="glass-card top-expenses">
+
+                            <h3>
+                                <i class="fa-solid fa-trophy"></i>
+                                Top 5 Largest Expenses
+                            </h3>
+
+                            <div id="topExpensesList">
+
+                                <p>No transactions yet.</p>
+
+                            </div>
 
                         </div>
 
                     </div>
 
-                    <div class="budget-item">
+                    <!-- Right Column -->
+                    <div class="right-column">
 
-                        <span>Food</span>
+                        <!-- Monthly Spending Trend -->
+                        <div class="glass-card monthly-trend-card">
 
-                        <progress value="70" max="100"></progress>
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fa-solid fa-chart-line"></i>
+                                    Monthly Spending Trend
+                                </h3>
+                            </div>
 
-                    </div>
+                            <div class="chart-container">
+                                <canvas id="monthlyTrendChart"></canvas>
+                            </div>
 
-                    <div class="budget-item">
+                        </div>
 
-                        <span>Shopping</span>
+                        <!-- Budget Progress -->
+                        <div class="glass-card budget-card">
 
-                        <progress value="45" max="100"></progress>
+                            <div class="card-header">
+                                <h3>Budget Progress</h3>
+                            </div>
 
-                    </div>
+                            <div class="budget-item">
+                                <span>Food</span>
+                                <progress value="70" max="100"></progress>
+                            </div>
 
-                    <div class="budget-item">
+                            <div class="budget-item">
+                                <span>Shopping</span>
+                                <progress value="45" max="100"></progress>
+                            </div>
 
-                        <span>Travel</span>
+                            <div class="budget-item">
+                                <span>Travel</span>
+                                <progress value="85" max="100"></progress>
+                            </div>
 
-                        <progress value="85" max="100"></progress>
+                        </div>
 
-                    </div>
+                        <!-- Monthly Comparison -->
+                        <div class="glass-card monthly-comparison">
 
-                </div>
+                            <h3>
+                                <i class="fa-solid fa-chart-line"></i>
+                                Monthly Comparison
+                            </h3>
 
-    </div>
+                            <div class="compare-row">
+                                <span>Current Month</span>
+                                <strong id="currentMonthExpense">₹0</strong>
+                            </div>
 
-    </section>
+                            <div class="compare-row">
+                                <span>Previous Month</span>
+                                <strong id="previousMonthExpense">₹0</strong>
+                            </div>
 
-    </main>
+                            <div id="comparisonMessage" class="comparison-message">
 
-    </div>
+                                No comparison available.
 
+                            </div>
+
+                        </div>
+
+                        <!-- Financial Health -->
+                        <div class="glass-card health-card">
+
+                            <div class="card-header">
+                                <h3>Financial Health</h3>
+                            </div>
+
+                            <!-- Smart Insights -->
+                            <div class="glass-card insights-card">
+
+                                <div class="card-header">
+                                    <h3>💡 Smart Insights</h3>
+                                </div>
+
+                                <ul id="insightsList">
+
+                                    <li>Analyzing your expenses...</li>
+
+                                </ul>
+
+                            </div>
+
+                            <!-- Analytics Summary -->
+                            <div class="analytics-grid">
+
+                                <div class="glass-card analytics-card">
+                                    <h4>Largest Expense</h4>
+                                    <h2 id="largestExpenseCard">₹0</h2>
+                                </div>
+
+                                <div class="glass-card analytics-card">
+                                    <h4>Smallest Expense</h4>
+                                    <h2 id="smallestExpenseCard">₹0</h2>
+                                </div>
+
+                                <div class="glass-card analytics-card">
+                                    <h4>Categories Used</h4>
+                                    <h2 id="categoriesUsedCard">0</h2>
+                                </div>
+
+                                <div class="glass-card analytics-card">
+                                    <h4>Highest Category</h4>
+                                    <h2 id="highestCategoryCard">-</h2>
+                                </div>
+
+                                <div class="glass-card analytics-card">
+                                    <h4>Average Expense</h4>
+                                    <h2 id="averageExpenseCard">₹0</h2>
+                                </div>
+
+                                <div class="glass-card analytics-card">
+                                    <h4>Total Transactions</h4>
+                                    <h2 id="transactionCountCard">0</h2>
+                                </div>
+
+                            </div>
+
+                            <!-- Health Score -->
+                            <div class="health-score">
+
+                                <div class="circle">
+
+                                    <svg width="170" height="170">
+
+                                        <circle cx="85" cy="85" r="70" class="bg-circle">
+                                        </circle>
+
+                                        <circle cx="85" cy="85" r="70" class="progress-circle" id="healthProgress">
+                                        </circle>
+
+                                    </svg>
+
+                                    <div class="score-text">
+
+                                        <h2 id="healthScore">0</h2>
+
+                                        <span>/100</span>
+
+                                    </div>
+
+                                </div>
+
+                                <p id="healthStatus">
+
+                                    Calculating...
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div> <!-- End Right Column -->
+
+                </div> <!-- End Dashboard Grid -->
+            </section>
+
+        </main>
+
+    </div> <!-- app-container -->
     <button class="fab">
-
         <i class="fa-solid fa-plus"></i>
-
     </button>
-    <!-- Expense Modal -->
 
     <div class="modal-overlay" id="expenseModal">
+        <!-- Expense Modal -->
 
         <div class="expense-modal">
 
             <div class="modal-header">
-
                 <h2>Add Expense</h2>
 
                 <button class="close-modal">
-
                     <i class="fa-solid fa-xmark"></i>
-
                 </button>
-
             </div>
 
             <form id="expenseForm">
 
                 <div class="input-group">
-
                     <label>Amount</label>
-
-                    <input type="number" id="amount" placeholder="₹ 0.00">
-
+                    <input type="number" id="amount" placeholder="₹0.00">
                 </div>
 
                 <div class="input-group">
-
                     <label>Category</label>
 
                     <select id="category">
-
                         <option>Food</option>
                         <option>Transport</option>
                         <option>Shopping</option>
@@ -539,23 +485,18 @@
                         <option>Bills</option>
                         <option>Travel</option>
                         <option>Others</option>
-
                     </select>
-
                 </div>
 
                 <div class="input-group">
-
                     <label>Note</label>
 
-                    <textarea id="note" rows="3" placeholder="Write something..."></textarea>
-
+                    <textarea id="note" rows="3" placeholder="Write something...">
+                    </textarea>
                 </div>
 
                 <button class="save-btn">
-
                     Save Expense
-
                 </button>
 
             </form>
@@ -563,11 +504,14 @@
         </div>
 
     </div>
-
-    <!-- Toast Container -->
+    <!-- =========================
+                     Toast Notifications
+                ========================= -->
     <div id="toastContainer"></div>
-    <!-- Delete Confirmation Modal -->
 
+    <!-- =========================
+                     Delete Confirmation Modal
+                ========================= -->
     <div class="modal-overlay" id="deleteModal">
 
         <div class="delete-modal">
@@ -597,7 +541,10 @@
         </div>
 
     </div>
-    <!-- Income & Budget Modal -->
+
+    <!-- =========================
+                     Income & Budget Modal
+                ========================= -->
     <div class="modal-overlay" id="budgetModal">
 
         <div class="modal">
@@ -609,28 +556,45 @@
             <form id="budgetForm">
 
                 <div class="form-group">
-                    <label for="monthlyIncome">Monthly Income</label>
+
+                    <label for="monthlyIncome">
+                        Monthly Income
+                    </label>
+
                     <input type="number" id="monthlyIncome" placeholder="Enter Monthly Income" required>
+
                 </div>
 
                 <div class="form-group">
-                    <label for="monthlyBudget">Monthly Budget</label>
+
+                    <label for="monthlyBudget">
+                        Monthly Budget
+                    </label>
+
                     <input type="number" id="monthlyBudget" placeholder="Enter Monthly Budget" required>
+
                 </div>
 
                 <button type="submit" class="primary-btn">
+
                     Save
+
                 </button>
 
             </form>
+
         </div>
 
     </div>
 
-    <!-- Chart.js -->
+    <!-- =========================
+                     External Libraries
+                ========================= -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- JavaScript Files -->
+    <!-- =========================
+                     JavaScript Files
+                ========================= -->
     <script src="js/utils.js"></script>
     <script src="js/storage.js"></script>
     <script src="js/notifications.js"></script>

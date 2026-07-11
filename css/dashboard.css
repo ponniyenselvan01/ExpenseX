@@ -267,7 +267,7 @@
 
 .dashboard-grid {
     display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-columns: 2fr 1fr;
     gap: 25px;
 }
 
@@ -576,5 +576,18 @@ td {
 }
 
 .dashboard-grid>* {
+    min-width: 0;
+}
+
+.top-expenses,
+.health-card {
+    margin-top: 25px;
+}
+
+.left-column,
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
     min-width: 0;
 }

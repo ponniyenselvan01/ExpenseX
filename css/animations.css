@@ -1,29 +1,23 @@
-/* ==========================
+/* ==========================================
    Fade In Up Animation
-========================== */
+========================================== */
 
 @keyframes fadeInUp {
-
     from {
-
         opacity: 0;
-
         transform: translateY(15px);
-
     }
 
     to {
-
         opacity: 1;
-
         transform: translateY(0);
-
     }
-
 }
 
+/* ==========================================
+   Fade In Utility Class
+========================================== */
+
 .fade-in {
-
-    animation: fadeInUp .45s ease forwards;
-
+    animation: fadeInUp 0.45s ease forwards;
 }

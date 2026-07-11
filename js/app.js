@@ -157,7 +157,7 @@ form.addEventListener("submit", function (e) {
 
             note: document.getElementById("note").value,
 
-            date: new Date().toLocaleDateString()
+            date: new Date().toISOString()
 
         });
 
