@@ -173,25 +173,3 @@ form.addEventListener("submit", function (e) {
 loadDashboard();
 
 const budgetForm = document.getElementById("budgetForm");
-
-budgetForm.addEventListener("submit", function (e) {
-
-    e.preventDefault();
-
-    const income =
-        Number(document.getElementById("monthlyIncome").value);
-
-    const budget =
-        Number(document.getElementById("monthlyBudget").value);
-
-    saveIncome(income);
-
-    saveBudget(budget);
-
-    budgetModal.classList.remove("active");
-
-    showToast("Financial settings saved!");
-
-    loadDashboard();
-
-});

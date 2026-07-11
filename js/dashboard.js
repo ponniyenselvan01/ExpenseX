@@ -1,3 +1,47 @@
+let currentFilter = "all";
+function filterTransactions(transactions) {
+
+    const today = new Date();
+
+    return transactions.filter(item => {
+
+        const date = new Date(item.date);
+
+        switch (currentFilter) {
+
+            case "today":
+
+                return date.toDateString() === today.toDateString();
+
+            case "week": {
+
+                const start = new Date(today);
+
+                start.setDate(today.getDate() - 7);
+
+                return date >= start;
+            }
+
+            case "month":
+
+                return (
+                    date.getMonth() === today.getMonth() &&
+                    date.getFullYear() === today.getFullYear()
+                );
+
+            case "year":
+
+                return date.getFullYear() === today.getFullYear();
+
+            default:
+
+                return true;
+
+        }
+
+    });
+
+}
 let deleteId = null;
 
 function deleteTransaction(id) {
@@ -8,15 +52,53 @@ function deleteTransaction(id) {
         .getElementById("deleteModal")
         .classList.add("active");
 
+
 }
-// ==========================
+document.addEventListener("DOMContentLoaded", () => {
+
+    const deleteModal = document.getElementById("deleteModal");
+
+    const cancelDelete = document.getElementById("cancelDelete");
+
+    const confirmDelete = document.getElementById("confirmDelete");
+
+    cancelDelete.addEventListener("click", () => {
+
+        deleteModal.classList.remove("active");
+
+        deleteId = null;
+
+    });
+
+    confirmDelete.addEventListener("click", () => {
+
+        let transactions = getTransactions();
+
+        transactions = transactions.filter(
+            transaction => transaction.id !== deleteId
+        );
+
+        saveTransactions(transactions);
+
+        deleteModal.classList.remove("active");
+
+        deleteId = null;
+
+        loadDashboard();
+
+        showToast("Transaction deleted successfully!", "success");
+
+    });
+
+});
+
 // Dashboard
 // ==========================
 
 function loadDashboard() {
 
-    const transactions = getTransactions();
-
+    const transactions =
+        filterTransactions(getTransactions());
     updateDashboardStats(transactions);
 
     loadTransactionTable(transactions);
@@ -259,8 +341,8 @@ function setupExportCSV() {
 
     exportBtn.onclick = function () {
 
-        const transactions = getTransactions();
-
+        const transactions =
+            filterTransactions(getTransactions());
         if (transactions.length === 0) {
 
             showToast("No transactions to export!", "error");
@@ -763,3 +845,20 @@ function updateMonthlyComparison(transactions) {
     }
 
 }
+
+document.querySelectorAll(".filter-btn").forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+        document.querySelector(".filter-btn.active")
+            ?.classList.remove("active");
+
+        btn.classList.add("active");
+
+        currentFilter = btn.dataset.filter;
+
+        loadDashboard();
+
+    });
+
+});

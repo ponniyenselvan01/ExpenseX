@@ -80,11 +80,13 @@
 }
 
 .main-content {
-
     flex: 1;
-
+    min-width: 0;
     padding: 35px;
+}
 
+* {
+    box-sizing: border-box;
 }
 
 .topbar {
@@ -264,15 +266,9 @@
 }
 
 .dashboard-grid {
-
     display: grid;
-
-    grid-template-columns: 2fr 1fr;
-
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
     gap: 25px;
-
-    margin-top: 35px;
-
 }
 
 .glass-card {
@@ -353,9 +349,7 @@
 }
 
 .transaction-card {
-
-    grid-column: 1;
-
+    min-height: 550px;
 }
 
 .budget-card {
@@ -579,4 +573,8 @@ td {
 
     color: var(--text);
 
+}
+
+.dashboard-grid>* {
+    min-width: 0;
 }
