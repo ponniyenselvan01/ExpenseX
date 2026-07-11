@@ -121,7 +121,13 @@ function loadDashboard() {
 
     updateMonthlyComparison(transactions);
 
-    // loadCharts();
+    if (typeof loadCharts === "function") {
+        loadCharts();
+    }
+
+    if (typeof loadMonthlyTrendChart === "function") {
+        loadMonthlyTrendChart();
+    }
 }
 // ==========================
 // Transaction Table
@@ -129,6 +135,8 @@ function loadDashboard() {
 function loadTransactionTable(transactions) {
 
     const table = document.getElementById("transactionTable");
+
+    if (!table) return;
 
     table.innerHTML = "";
     if (transactions.length === 0) {
@@ -396,17 +404,26 @@ function updateFinancialHealth(transactions) {
     });
 
     const totalIncome = getIncome();
-    let score = Math.max(
-        0,
-        Math.min(
-            100,
-            Math.round((1 - totalExpense / totalIncome) * 100)
-        )
-    );
+    let score = 0;
+
+    if (totalIncome > 0) {
+
+        score = Math.max(
+            0,
+            Math.min(
+                100,
+                Math.round((1 - totalExpense / totalIncome) * 100)
+            )
+        );
+
+    }
 
     animateNumber("healthScore", score);
 
     const circle = document.getElementById("healthProgress");
+
+    if (!circle) return;
+
     if (score >= 80) {
 
         circle.style.stroke = "#22c55e";
@@ -462,6 +479,7 @@ function updateFinancialHealth(transactions) {
 
     const status = document.getElementById("healthStatus");
 
+    if (!status) return;
     if (score >= 80) {
 
         status.textContent = "🟢 Excellent";
@@ -799,14 +817,23 @@ function updateMonthlyComparison(transactions) {
 
     });
 
-    document.getElementById("currentMonthExpense").textContent =
+    const currentMonthExpense =
+        document.getElementById("currentMonthExpense");
+
+    const previousMonthExpense =
+        document.getElementById("previousMonthExpense");
+
+    if (!currentMonthExpense || !previousMonthExpense) return;
+    currentMonthExpense.textContent =
         `₹${currentTotal.toLocaleString()}`;
 
-    document.getElementById("previousMonthExpense").textContent =
+    previousMonthExpense.textContent =
         `₹${previousTotal.toLocaleString()}`;
 
     const message =
         document.getElementById("comparisonMessage");
+
+    if (!message) return;
 
     if (previousTotal === 0) {
 

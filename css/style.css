@@ -5,9 +5,9 @@
 :root {
 
     /* Brand Colors */
-    --primary: #5B5FEF;
-    --secondary: #7C4DFF;
-    --accent: #00C896;
+    --primary: #5b5fef;
+    --secondary: #7c4dff;
+    --accent: #00c896;
 
     /* Status Colors */
     --success: #2ECC71;
@@ -30,10 +30,10 @@
     --radius: 18px;
 
     /* Shadow */
-    --shadow: 0 10px 30px rgba(0, 0, 0, .08);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 
     /* Animation */
-    --transition: .3s ease;
+    --transition: 0.3s ease;
 }
 
 /* Reset */
@@ -48,8 +48,7 @@ body {
 
     font-family: 'Inter', sans-serif;
 
-    background: var(--bg);
-
+    background: var(--background);
     color: var(--text);
 
     transition:
@@ -117,7 +116,7 @@ body::after {
 
     filter: blur(120px);
 
-    opacity: .6;
+    opacity: 0.6;
 
     z-index: -1;
 
@@ -145,7 +144,7 @@ body::after {
 
     height: 420px;
 
-    background: #00C896;
+    background: #00c896;
 
     right: -150px;
 

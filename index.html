@@ -13,6 +13,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/analytics.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
@@ -41,7 +42,7 @@
                     <span>Dashboard</span>
                 </a>
 
-                <a href="#">
+                <a href="#" id="analyticsMenu">
                     <i class="fa-solid fa-chart-line"></i>
                     <span>Analytics</span>
                 </a>
@@ -78,7 +79,7 @@
             <!-- Top Bar -->
             <header class="topbar">
 
-                <h1>Dashboard</h1>
+                <h1 id="pageTitle">Dashboard</h1>
 
                 <div class="top-actions">
 
@@ -446,6 +447,89 @@
 
                 </div> <!-- End Dashboard Grid -->
             </section>
+            <section class="analytics-page" id="analyticsPage" style="display:none;">
+
+                <div class="analytics-title">
+
+                    <h1>Analytics Dashboard</h1>
+
+                    <p>
+                        Analyze your spending habits and financial performance.
+                    </p>
+
+                </div>
+
+                <!-- Summary Cards -->
+                <div class="analytics-summary">
+
+                    <div class="glass-card analytics-stat">
+                        <h4>Total Expenses</h4>
+                        <h2 id="analyticsTotalExpense">₹0</h2>
+                    </div>
+
+                    <div class="glass-card analytics-stat">
+                        <h4>Total Income</h4>
+                        <h2 id="analyticsTotalIncome">₹0</h2>
+                    </div>
+
+                    <div class="glass-card analytics-stat">
+                        <h4>Total Savings</h4>
+                        <h2 id="analyticsTotalSavings">₹0</h2>
+                    </div>
+
+                    <div class="glass-card analytics-stat">
+                        <h4>Transactions</h4>
+                        <h2 id="analyticsTransactionCount">0</h2>
+                    </div>
+
+                </div>
+
+                <!-- Charts -->
+                <div class="analytics-grid">
+
+                    <div class="glass-card analytics-chart-card">
+                        <div class="card-header">
+                            <h3>Income vs Expense</h3>
+                        </div>
+
+                        <canvas id="incomeExpenseChart"></canvas>
+                    </div>
+
+                    <div class="glass-card analytics-chart-card">
+                        <div class="card-header">
+                            <h3>Category Distribution</h3>
+                        </div>
+
+                        <canvas id="analyticsPieChart"></canvas>
+                    </div>
+
+
+                </div>
+                <div class="analytics-insights">
+
+                    <div class="glass-card analytics-stat">
+                        <h4>Highest Category</h4>
+                        <h2 id="highestCategoryAnalytics">-</h2>
+                    </div>
+
+                    <div class="glass-card analytics-stat">
+                        <h4>Largest Expense</h4>
+                        <h2 id="largestExpenseAnalytics">₹0</h2>
+                    </div>
+
+                    <div class="glass-card analytics-stat">
+                        <h4>Average Expense</h4>
+                        <h2 id="averageExpenseAnalytics">₹0</h2>
+                    </div>
+
+                    <div class="glass-card analytics-stat">
+                        <h4>Budget Used</h4>
+                        <h2 id="budgetUsedAnalytics">0%</h2>
+                    </div>
+
+                </div>
+
+            </section>
 
         </main>
 
@@ -599,8 +683,10 @@
     <script src="js/storage.js"></script>
     <script src="js/notifications.js"></script>
     <script src="js/dashboard.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/analytics.js"></script>
     <script src="js/charts.js"></script>
+    <script src="js/app.js"></script>
+
 
 </body>
 

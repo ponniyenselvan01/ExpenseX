@@ -1,18 +1,33 @@
+// ==========================
+// Animate Currency Value
+// ==========================
+
 function animateValue(elementId, start, end, duration = 800) {
 
     const element = document.getElementById(elementId);
 
-    const range = end - start;
+    if (!element) return;
 
+    if (duration <= 0) {
+        element.textContent = "₹" + end.toLocaleString();
+        return;
+    }
+
+    const range = end - start;
     let startTime = null;
 
     function update(currentTime) {
 
-        if (!startTime) startTime = currentTime;
+        if (!startTime) {
+            startTime = currentTime;
+        }
 
-        const progress = Math.min((currentTime - startTime) / duration, 1);
+        const progress = Math.min(
+            (currentTime - startTime) / duration,
+            1
+        );
 
-        const value = Math.floor(progress * range + start);
+        const value = Math.floor(start + range * progress);
 
         element.textContent = "₹" + value.toLocaleString();
 
@@ -25,6 +40,7 @@ function animateValue(elementId, start, end, duration = 800) {
     requestAnimationFrame(update);
 
 }
+
 // ==========================
 // Animate Number
 // ==========================
@@ -33,8 +49,14 @@ function animateNumber(elementId, endValue, duration = 1000) {
 
     const element = document.getElementById(elementId);
 
-    let start = 0;
+    if (!element) return;
 
+    if (duration <= 0) {
+        element.textContent = endValue;
+        return;
+    }
+
+    let start = 0;
     const increment = endValue / (duration / 16);
 
     function update() {
@@ -55,6 +77,6 @@ function animateNumber(elementId, endValue, duration = 1000) {
 
     }
 
-    update();
+    requestAnimationFrame(update);
 
 }

@@ -2,6 +2,7 @@ let monthlyTrendChart;
 let expenseChart;
 let pieChart;
 function loadCharts() {
+    if (typeof Chart === "undefined") return;
 
     const lineCtx = document.getElementById("lineChart");
 
@@ -47,13 +48,13 @@ function loadCharts() {
                     data: values,
 
                     backgroundColor: [
-                        "#5B5FEF",
-                        "#00C896",
-                        "#FFB703",
-                        "#FF5A5F",
-                        "#7C4DFF",
-                        "#00B8D9",
-                        "#8BC34A"
+                        "#5b5fef",
+                        "#00c896",
+                        "#ffb703",
+                        "#ff5a5f",
+                        "#7c4dff",
+                        "#00b8d9",
+                        "#8bc34a"
                     ],
 
                     borderRadius: 10,
@@ -144,13 +145,13 @@ function loadCharts() {
         const data = Object.values(categoryTotals);
 
         const colors = [
-            "#5B5FEF",
-            "#00C896",
-            "#FFB703",
-            "#FF5A5F",
-            "#7C4DFF",
-            "#00B8D9",
-            "#8BC34A"
+            "#5b5fef",
+            "#00c896",
+            "#ffb703",
+            "#ff5a5f",
+            "#7c4dff",
+            "#00b8d9",
+            "#8bc34a"
         ];
 
         if (pieChart) {
@@ -194,30 +195,14 @@ function loadCharts() {
 
 document.addEventListener("DOMContentLoaded", loadCharts);
 function loadMonthlyTrendChart() {
+    if (typeof Chart === "undefined") return;
+
 
     const ctx = document.getElementById("monthlyTrendChart");
 
     if (!ctx) return;
 
     const transactions = getTransactions();
-
-    const monthlyTotals = {};
-
-    transactions.forEach(item => {
-
-        const date = new Date(item.date);
-
-        const month = date.toLocaleString("default", {
-            month: "short"
-        });
-
-        if (!monthlyTotals[month]) {
-            monthlyTotals[month] = 0;
-        }
-
-        monthlyTotals[month] += Number(item.amount);
-
-    });
 
     const labels = [
         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -235,8 +220,6 @@ function loadMonthlyTrendChart() {
         data[monthIndex] += Number(item.amount);
 
     });
-    labels,
-        data
 
     if (monthlyTrendChart) {
         monthlyTrendChart.destroy();
@@ -258,7 +241,7 @@ function loadMonthlyTrendChart() {
 
                 borderColor: "#6366F1",
 
-                backgroundColor: "rgba(99,102,241,.18)",
+                backgroundColor: "rgba(99,102,241,0.18)",
 
                 borderWidth: 3,
 
@@ -299,7 +282,7 @@ function loadMonthlyTrendChart() {
 
                 tooltip: {
 
-                    backgroundColor: "#1F2937",
+                    backgroundColor: "#1f2937",
 
                     titleColor: "#fff",
 
@@ -325,7 +308,7 @@ function loadMonthlyTrendChart() {
 
                     ticks: {
 
-                        color: "#AAB2C8"
+                        color: "#aab2c8"
 
                     },
 
@@ -353,7 +336,7 @@ function loadMonthlyTrendChart() {
 
                     grid: {
 
-                        color: "rgba(255,255,255,.06)"
+                        color: "rgba(255,255,255,0.06)"
 
                     }
 
@@ -367,3 +350,145 @@ function loadMonthlyTrendChart() {
 
 }
 loadMonthlyTrendChart();
+let incomeExpenseChart;
+let analyticsPieChart;
+function loadAnalyticsCharts() {
+
+    if (typeof Chart === "undefined") return;
+
+    const incomeCtx = document.getElementById("incomeExpenseChart");
+    const pieCtx = document.getElementById("analyticsPieChart");
+
+    const transactions = getTransactions();
+
+    const income = getIncome();
+
+    let expense = 0;
+
+    const categories = {};
+
+    transactions.forEach(item => {
+
+        expense += Number(item.amount);
+
+        categories[item.category] =
+            (categories[item.category] || 0) + Number(item.amount);
+
+    });
+
+    // ------------------------
+    // Income vs Expense Chart
+    // ------------------------
+
+    if (incomeCtx) {
+
+        if (incomeExpenseChart) {
+            incomeExpenseChart.destroy();
+        }
+
+        incomeExpenseChart = new Chart(incomeCtx, {
+
+            type: "bar",
+
+            data: {
+
+                labels: ["Income", "Expense"],
+
+                datasets: [{
+
+                    data: [income, expense],
+
+                    backgroundColor: [
+                        "#22c55e",
+                        "#ef4444"
+                    ],
+
+                    borderRadius: 10
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+                        display: false
+                    }
+
+                },
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
+
+    // ------------------------
+    // Category Pie Chart
+    // ------------------------
+
+    if (pieCtx) {
+
+        if (analyticsPieChart) {
+            analyticsPieChart.destroy();
+        }
+
+        analyticsPieChart = new Chart(pieCtx, {
+
+            type: "doughnut",
+
+            data: {
+
+                labels: Object.keys(categories),
+
+                datasets: [{
+
+                    data: Object.values(categories),
+
+                    backgroundColor: [
+
+                        "#6366F1",
+                        "#F59E0B",
+                        "#10B981",
+                        "#EF4444",
+                        "#8B5CF6",
+                        "#06B6D4",
+                        "#84CC16"
+
+                    ]
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                cutout: "60%"
+
+            }
+
+        });
+
+    }
+
+}

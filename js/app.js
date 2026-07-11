@@ -5,23 +5,34 @@ const savedTheme = localStorage.getItem("theme");
 
 if (savedTheme === "dark") {
     document.body.classList.add("dark");
-    themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+
+    if (themeBtn) {
+        themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    }
 }
 
 // Toggle theme
-themeBtn.addEventListener("click", () => {
+if (themeBtn) {
 
-    document.body.classList.toggle("dark");
+    themeBtn.addEventListener("click", () => {
 
-    const isDark = document.body.classList.contains("dark");
+        document.body.classList.toggle("dark");
 
-    themeBtn.innerHTML = isDark
-        ? '<i class="fa-solid fa-sun"></i>'
-        : '<i class="fa-solid fa-moon"></i>';
+        const isDark = document.body.classList.contains("dark");
 
-    localStorage.setItem("theme", isDark ? "dark" : "light");
+        themeBtn.innerHTML = isDark
+            ? '<i class="fa-solid fa-sun"></i>'
+            : '<i class="fa-solid fa-moon"></i>';
 
-});
+        localStorage.setItem(
+            "theme",
+            isDark ? "dark" : "light"
+        );
+
+    });
+
+}
+
 // =====================
 // Income & Budget Modal
 // =====================
@@ -66,31 +77,29 @@ const modal = document.getElementById("expenseModal");
 
 const closeBtn = document.querySelector(".close-modal");
 
-fab.addEventListener("click", () => {
+if (fab && modal && closeBtn) {
 
-    modal.classList.add("active");
+    fab.addEventListener("click", () => {
+        modal.classList.add("active");
+    });
 
-});
-
-closeBtn.addEventListener("click", () => {
-
-    modal.classList.remove("active");
-
-});
-
-modal.addEventListener("click", (e) => {
-
-    if (e.target === modal) {
-
+    closeBtn.addEventListener("click", () => {
         modal.classList.remove("active");
+    });
 
-    }
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.classList.remove("active");
+        }
+    });
 
-});
+}
+
+
 
 document.addEventListener("keydown", (e) => {
 
-    if (e.key === "Escape") {
+    if (e.key === "Escape" && modal) {
 
         modal.classList.remove("active");
 
@@ -102,74 +111,141 @@ document.addEventListener("keydown", (e) => {
 // Form Validation
 // =====================
 
-const form = document.getElementById("expenseForm");
-let editingId = null;
-form.addEventListener("submit", function (e) {
-
-    e.preventDefault();
-
-});
 
 const amountInput = document.getElementById("amount");
+const form = document.getElementById("expenseForm");
+let editingId = null;
 
-form.addEventListener("submit", function (e) {
+if (form) {
 
-    e.preventDefault();
+    form.addEventListener("submit", function (e) {
 
-    const amount = Number(amountInput.value);
+        e.preventDefault();
 
-    if (amount <= 0 || isNaN(amount)) {
+        const amount = Number(amountInput.value);
 
-        showToast("Please enter a valid amount.", "error");
+        if (amount <= 0 || isNaN(amount)) {
 
-        amountInput.focus();
+            showToast("Please enter a valid amount.", "error");
 
-        return;
+            amountInput.focus();
 
-    }
+            return;
 
-    if (editingId) {
+        }
 
-        updateTransaction({
+        if (editingId) {
 
-            id: editingId,
+            updateTransaction({
 
-            amount,
+                id: editingId,
 
-            category: document.getElementById("category").value,
+                amount,
 
-            note: document.getElementById("note").value,
+                category: document.getElementById("category").value,
 
-            date: new Date().toISOString().split("T")[0]
-        });
+                note: document.getElementById("note").value,
 
-        editingId = null;
+                date: new Date().toISOString().split("T")[0]
 
-    } else {
+            });
 
-        addTransaction({
+            editingId = null;
 
-            id: Date.now(),
+        } else {
 
-            amount,
+            addTransaction({
 
-            category: document.getElementById("category").value,
+                id: Date.now(),
 
-            note: document.getElementById("note").value,
+                amount,
 
-            date: new Date().toISOString()
+                category: document.getElementById("category").value,
 
-        });
+                note: document.getElementById("note").value,
 
-    }
+                date: new Date().toISOString().split("T")[0]
+
+            });
+
+        }
+
+        loadDashboard();
+        loadAnalytics();
+        showToast("Expense Added Successfully!");
+
+        form.reset();
+
+        modal.classList.remove("active");
+
+    });
+
+}
+
+if (typeof loadDashboard === "function") {
     loadDashboard();
-
-    showToast("Expense Added Successfully!");
-    form.reset();
-
-    modal.classList.remove("active");
-});
-
-loadDashboard();
+}
 
 const budgetForm = document.getElementById("budgetForm");
+if (budgetForm) {
+
+    budgetForm.addEventListener("submit", function (e) {
+
+        e.preventDefault();
+
+        const income = Number(document.getElementById("monthlyIncome").value);
+        const budget = Number(document.getElementById("monthlyBudget").value);
+
+        saveIncome(income);
+        saveBudget(budget);
+
+        budgetModal.classList.remove("active");
+
+        showToast("Financial settings saved!");
+
+        if (typeof loadDashboard === "function") {
+            loadDashboard();
+            loadAnalytics();
+        }
+    });
+}
+const dashboardPage = document.querySelector(".dashboard");
+const analyticsPage = document.getElementById("analyticsPage");
+
+const analyticsMenu = document.getElementById("analyticsMenu");
+const dashboardMenu = document.querySelector(".menu a.active");
+
+if (analyticsMenu) {
+
+    analyticsMenu.addEventListener("click", function (e) {
+
+        e.preventDefault();
+
+        dashboardPage.style.display = "none";
+        analyticsPage.style.display = "flex";
+        loadAnalytics();
+        document.getElementById("pageTitle").textContent = "Analytics";
+
+        analyticsMenu.classList.add("active");
+        dashboardMenu.classList.remove("active");
+
+    });
+
+}
+
+if (dashboardMenu) {
+
+    dashboardMenu.addEventListener("click", function (e) {
+
+        e.preventDefault();
+
+        analyticsPage.style.display = "none";
+        dashboardPage.style.display = "flex";
+        document.getElementById("pageTitle").textContent = "Dashboard";
+
+        dashboardMenu.classList.add("active");
+        analyticsMenu.classList.remove("active");
+
+    });
+
+}

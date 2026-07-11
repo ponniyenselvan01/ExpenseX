@@ -8,7 +8,7 @@
     padding: 30px;
     display: flex;
     flex-direction: column;
-    border: 1px solid rgba(255, 255, 255, .6);
+    border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .logo {
@@ -25,7 +25,7 @@
 
     margin-bottom: 45px;
 
-    color: #5B5FEF;
+    color: #5b5fef;
 
 }
 
@@ -53,13 +53,13 @@
 
     font-weight: 600;
 
-    transition: .35s;
+    transition: 0.35s;
 
 }
 
 .menu a:hover {
 
-    background: linear-gradient(135deg, #5B5FEF, #7C4DFF);
+    background: linear-gradient(135deg, #5b5fef, #7c4dff);
 
     color: white;
 
@@ -71,7 +71,7 @@
 
 .menu .active {
 
-    background: linear-gradient(135deg, #5B5FEF, #7C4DFF);
+    background: linear-gradient(135deg, #5b5fef, #7c4dff);
 
     color: white;
 
@@ -85,9 +85,6 @@
     padding: 35px;
 }
 
-* {
-    box-sizing: border-box;
-}
 
 .topbar {
 
@@ -155,7 +152,7 @@
 
     border-radius: 50%;
 
-    background: linear-gradient(135deg, #5B5FEF, #7C4DFF);
+    background: linear-gradient(135deg, #5b5fef, #7c4dff);
 
     color: white;
 
@@ -163,19 +160,13 @@
 
     box-shadow: 0 20px 40px rgba(91, 95, 239, .35);
 
-    transition: .35s;
+    transition: 0.35s;
 
 }
 
 .fab:hover {
 
     transform: translateY(-8px) scale(1.08);
-
-}
-
-.fab:hover {
-
-    transform: scale(1.1);
 
 }
 
@@ -213,7 +204,7 @@
 
     border-radius: 24px;
 
-    transition: .35s;
+    transition: 0.35s;
 
     box-shadow: var(--shadow);
 
@@ -235,7 +226,7 @@
 
     font-size: 30px;
 
-    color: #5B5FEF;
+    color: #5b5fef;
 
     margin-bottom: 15px;
 
@@ -287,7 +278,7 @@
 
     border: 1px solid rgba(255, 255, 255, .45);
 
-    transition: .35s;
+    transition: 0.35s;
 
 }
 
@@ -318,7 +309,7 @@
 
     border-radius: 10px;
 
-    background: #5B5FEF;
+    background: #5b5fef;
 
     color: white;
 
@@ -389,7 +380,7 @@ progress {
 
     height: 10px;
 
-    accent-color: #5B5FEF;
+    accent-color: #5b5fef;
 
     border-radius: 20px;
 
@@ -447,7 +438,7 @@ td {
 
     visibility: hidden;
 
-    transition: .35s;
+    transition: 0.35s;
 
     z-index: 999;
 
@@ -473,7 +464,7 @@ td {
 
     box-shadow: var(--shadow);
 
-    animation: popup .3s ease;
+    animation: popup 0.3s ease;
 
 }
 
@@ -481,7 +472,7 @@ td {
 
     from {
 
-        transform: translateY(20px) scale(.95);
+        transform: translateY(20px) scale(0.95);
 
         opacity: 0;
 
@@ -553,7 +544,7 @@ td {
 
     border-radius: 14px;
 
-    background: #5B5FEF;
+    background: #5b5fef;
 
     color: white;
 

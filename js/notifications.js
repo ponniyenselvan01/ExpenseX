@@ -2,15 +2,18 @@ function showToast(message, type = "success") {
 
     const container = document.getElementById("toastContainer");
 
-    const toast = document.createElement("div");
+    if (!container) return;
 
+    const toast = document.createElement("div");
     toast.className = `toast ${type}`;
 
-    let icon = "✅";
+    const icons = {
+        success: "✅",
+        error: "❌",
+        warning: "⚠️"
+    };
 
-    if (type === "error") icon = "❌";
-
-    if (type === "warning") icon = "⚠️";
+    const icon = icons[type] || "✅";
 
     toast.innerHTML = `
         <span>${icon}</span>

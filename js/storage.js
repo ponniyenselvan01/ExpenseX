@@ -32,8 +32,9 @@ function updateTransaction(updatedTransaction) {
 
     }
 
-    loadDashboard();
-
+    if (typeof loadDashboard === "function") {
+        loadDashboard();
+    }
 }
 
 function editTransaction(id) {
@@ -44,11 +45,15 @@ function editTransaction(id) {
 
     if (!transaction) return;
 
-    document.getElementById("amount").value = transaction.amount;
+    const amount = document.getElementById("amount");
+    const category = document.getElementById("category");
+    const note = document.getElementById("note");
 
-    document.getElementById("category").value = transaction.category;
+    if (!amount || !category || !note || !modal) return;
 
-    document.getElementById("note").value = transaction.note;
+    amount.value = transaction.amount;
+    category.value = transaction.category;
+    note.value = transaction.note;
 
     editingId = id;
 
@@ -85,12 +90,12 @@ function saveBudget(budget) {
 }
 
 function getTransactions() {
-    return JSON.parse(localStorage.getItem("transactions")) || [];
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 }
 
 function saveTransactions(transactions) {
     localStorage.setItem(
-        "transactions",
+        STORAGE_KEY,
         JSON.stringify(transactions)
     );
 }
