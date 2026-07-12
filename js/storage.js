@@ -34,6 +34,9 @@ function updateTransaction(updatedTransaction) {
 
     if (typeof loadDashboard === "function") {
         loadDashboard();
+        if (typeof loadTransactionsPage === "function") {
+            loadTransactionsPage();
+        }
     }
 }
 
@@ -98,4 +101,14 @@ function saveTransactions(transactions) {
         STORAGE_KEY,
         JSON.stringify(transactions)
     );
+}
+
+let deleteId = null;
+
+function deleteTransaction(id) {
+
+    deleteId = id;
+
+    document.getElementById("deleteModal").classList.add("active");
+
 }

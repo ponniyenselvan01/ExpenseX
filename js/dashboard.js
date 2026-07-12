@@ -42,7 +42,6 @@ function filterTransactions(transactions) {
     });
 
 }
-let deleteId = null;
 
 function deleteTransaction(id) {
 
@@ -142,7 +141,8 @@ function loadTransactionTable(transactions) {
     if (transactions.length === 0) {
 
         table.innerHTML = `
-        <tr class="fade-in">
+        
+        tr class="fade-in">
             <td colspan="5" class="empty-state">
 
                 <div class="empty-box">
@@ -890,3 +890,55 @@ document.querySelectorAll(".filter-btn").forEach(btn => {
 
 });
 
+function loadTransactionsPage() {
+
+    const tbody = document.getElementById("transactionsTableBody");
+
+    if (!tbody) return;
+
+    const transactions = getTransactions();
+
+    tbody.innerHTML = "";
+
+    if (transactions.length === 0) {
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5" style="text-align:center;">
+                    No transactions found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    transactions.forEach(item => {
+
+        tbody.innerHTML += `
+            <tr>
+
+                <td>${new Date(item.date).toLocaleDateString()}</td>
+
+                <td>${item.category}</td>
+
+                <td>₹${Number(item.amount).toLocaleString()}</td>
+
+                <td>${item.note}</td>
+
+                <td>
+                    <button onclick="editTransaction(${item.id})">
+                        ✏️
+                    </button>
+
+                    <button onclick="deleteTransaction(${item.id})">
+                        🗑️
+                    </button>
+                </td>
+
+            </tr>
+        `;
+
+    });
+
+}

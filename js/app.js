@@ -172,6 +172,7 @@ if (form) {
 
         loadDashboard();
         loadAnalytics();
+        loadTransactionsPage();
         showToast("Expense Added Successfully!");
 
         form.reset();
@@ -213,7 +214,9 @@ const dashboardPage = document.querySelector(".dashboard");
 const analyticsPage = document.getElementById("analyticsPage");
 
 const analyticsMenu = document.getElementById("analyticsMenu");
-const dashboardMenu = document.querySelector(".menu a.active");
+const dashboardMenu = document.getElementById("dashboardMenu");
+const transactionsPage = document.getElementById("transactionsPage");
+const transactionsMenu = document.getElementById("transactionsMenu");
 
 if (analyticsMenu) {
 
@@ -233,6 +236,26 @@ if (analyticsMenu) {
 
 }
 
+if (transactionsMenu) {
+
+    transactionsMenu.addEventListener("click", function (e) {
+
+        e.preventDefault();
+
+        dashboardPage.style.display = "none";
+        analyticsPage.style.display = "none";
+        transactionsPage.style.display = "block";
+
+        document.getElementById("pageTitle").textContent = "Transactions";
+        loadTransactionsPage();
+
+        dashboardMenu.classList.remove("active");
+        analyticsMenu.classList.remove("active");
+        transactionsMenu.classList.add("active");
+
+    });
+
+}
 if (dashboardMenu) {
 
     dashboardMenu.addEventListener("click", function (e) {
@@ -240,11 +263,48 @@ if (dashboardMenu) {
         e.preventDefault();
 
         analyticsPage.style.display = "none";
+        transactionsPage.style.display = "none";
         dashboardPage.style.display = "flex";
         document.getElementById("pageTitle").textContent = "Dashboard";
 
         dashboardMenu.classList.add("active");
         analyticsMenu.classList.remove("active");
+
+    });
+
+}
+
+const deleteModal = document.getElementById("deleteModal");
+const cancelDelete = document.getElementById("cancelDelete");
+const confirmDelete = document.getElementById("confirmDelete");
+
+if (cancelDelete) {
+
+    cancelDelete.addEventListener("click", () => {
+
+        deleteModal.classList.remove("active");
+
+    });
+
+}
+
+if (confirmDelete) {
+
+    confirmDelete.addEventListener("click", () => {
+
+        const transactions = getTransactions().filter(
+            item => item.id !== deleteId
+        );
+
+        saveTransactions(transactions);
+
+        loadDashboard();
+        loadAnalytics();
+        loadTransactionsPage();
+
+        showToast("Transaction deleted successfully.");
+
+        deleteModal.classList.remove("active");
 
     });
 

@@ -37,9 +37,9 @@
 
             <nav class="menu">
 
-                <a href="#" class="active">
+                <a href="#" id="dashboardMenu" class="active">
                     <i class="fa-solid fa-house"></i>
-                    <span>Dashboard</span>
+                    Dashboard
                 </a>
 
                 <a href="#" id="analyticsMenu">
@@ -47,7 +47,7 @@
                     <span>Analytics</span>
                 </a>
 
-                <a href="#">
+                <a href="#" id="transactionsMenu">
                     <i class="fa-solid fa-wallet"></i>
                     <span>Transactions</span>
                 </a>
@@ -531,6 +531,59 @@
 
             </section>
 
+            <!-- Paste the new Transactions section here -->
+
+            <section id="transactionsPage" class="transactions-page" style="display:none;">
+
+                <p class="page-description">
+                    View, search and manage all your expenses.
+                </p>
+
+                <div class="glass-card">
+
+                    <div class="transactions-toolbar">
+
+                        <input type="text" id="transactionSearch" placeholder="Search transactions...">
+
+                        <select id="transactionFilter">
+                            <option value="All">All Categories</option>
+                            <option>Food</option>
+                            <option>Transport</option>
+                            <option>Shopping</option>
+                            <option>Bills</option>
+                            <option>Health</option>
+                            <option>Travel</option>
+                            <option>Others</option>
+                        </select>
+                        <button id="exportCSV" class="primary-btn" onclick="exportTransactionsCSV()">
+                            <i class="fa-solid fa-download"></i>
+                            Export CSV
+                        </button>
+
+                    </div>
+
+                    <table class="transactions-table">
+
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Note</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="transactionsTableBody">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
         </main>
 
     </div> <!-- app-container -->
@@ -685,6 +738,7 @@
     <script src="js/dashboard.js"></script>
     <script src="js/analytics.js"></script>
     <script src="js/charts.js"></script>
+    <script src="js/transactions.js"></script>
     <script src="js/app.js"></script>
 
 
