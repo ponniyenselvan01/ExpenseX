@@ -218,6 +218,9 @@ const dashboardMenu = document.getElementById("dashboardMenu");
 const transactionsPage = document.getElementById("transactionsPage");
 const transactionsMenu = document.getElementById("transactionsMenu");
 
+const goalsPage = document.getElementById("goalsPage");
+const goalsMenu = document.getElementById("goalsMenu");
+
 if (analyticsMenu) {
 
     analyticsMenu.addEventListener("click", function (e) {
@@ -305,6 +308,29 @@ if (confirmDelete) {
         showToast("Transaction deleted successfully.");
 
         deleteModal.classList.remove("active");
+
+    });
+
+}
+
+if (goalsMenu) {
+
+    goalsMenu.addEventListener("click", function (e) {
+
+        e.preventDefault();
+
+        dashboardPage.style.display = "none";
+        analyticsPage.style.display = "none";
+        transactionsPage.style.display = "none";
+        goalsPage.style.display = "block";
+
+        document.getElementById("pageTitle").textContent = "Goals";
+
+        if (dashboardMenu) dashboardMenu.classList.remove("active");
+        if (analyticsMenu) analyticsMenu.classList.remove("active");
+        if (transactionsMenu) transactionsMenu.classList.remove("active");
+
+        goalsMenu.classList.add("active");
 
     });
 

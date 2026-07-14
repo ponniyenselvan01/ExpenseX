@@ -52,10 +52,7 @@
                     <span>Transactions</span>
                 </a>
 
-                <a href="#">
-                    <i class="fa-solid fa-bullseye"></i>
-                    <span>Goals</span>
-                </a>
+
 
                 <a href="#">
                     <i class="fa-solid fa-calendar"></i>
@@ -65,6 +62,10 @@
                 <a href="#">
                     <i class="fa-solid fa-gear"></i>
                     <span>Settings</span>
+                </a>
+                <a href="#" id="goalsMenu">
+                    <i class="fa-solid fa-bullseye"></i>
+                    <span>Goals</span>
                 </a>
 
             </nav>
@@ -583,8 +584,67 @@
                 </div>
 
             </section>
+            <section id="goalsPage" class="goals-page" style="display:none;">
 
-        </main>
+                <div class="analytics-title">
+                    <h1>Financial Goals</h1>
+                    <p>Track your savings goals.</p>
+                </div>
+
+                <div class="glass-card">
+
+                    <div class="goal-input-group">
+
+                        <input type="number" id="goalAmount" placeholder="Enter Savings Goal">
+                        <button id="saveGoalBtn" class="primary-btn">
+                            Save Goal
+                        </button>
+
+                    </div>
+
+                    <br><br>
+
+                    <div class="goals-summary">
+
+                        <div class="glass-card goal-card">
+                            <h4>Goal Amount</h4>
+                            <h2 id="goalAmountDisplay">₹0</h2>
+                        </div>
+
+                        <div class="glass-card goal-card">
+                            <h4>Current Savings</h4>
+                            <h2 id="currentSavingsGoal">₹0</h2>
+                        </div>
+
+                        <div class="glass-card goal-card">
+                            <h4>Remaining</h4>
+                            <h2 id="remainingGoal">₹0</h2>
+                        </div>
+
+                    </div>
+
+                    <br>
+
+                    <div class="progress-bar">
+                        <div id="goalProgress" class="progress-fill"></div>
+                    </div>
+
+                    <p id="goalPercentage" class="goal-percent">
+                        0% Completed
+                    </p>
+
+                    <p id="goalMessage"></p>
+                    <div id="goalProgress" class="progress-fill">
+                    </div>
+
+                </div>
+
+
+    </div>
+
+    </section>
+
+    </main>
 
     </div> <!-- app-container -->
     <button class="fab">
@@ -739,6 +799,7 @@
     <script src="js/analytics.js"></script>
     <script src="js/charts.js"></script>
     <script src="js/transactions.js"></script>
+    <script src="js/goals.js"></script>
     <script src="js/app.js"></script>
 
 

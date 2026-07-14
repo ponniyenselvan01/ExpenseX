@@ -893,3 +893,89 @@
     background: #6366f1;
 
 }
+
+/* ==========================
+   Goals Progress Bar
+========================== */
+
+.progress-bar {
+    width: 100%;
+    height: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 18px 0;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #6366F1, #8B5CF6);
+    border-radius: inherit;
+    transition: width .4s ease;
+}
+
+/* ==========================
+   Goals Cards
+========================== */
+
+.goals-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.goal-card {
+    padding: 24px;
+    text-align: center;
+}
+
+.goal-card h4 {
+    color: var(--text-secondary);
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.goal-card h2 {
+    font-size: 32px;
+    color: var(--primary);
+}
+
+.goal-input-group {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.goal-input-group input {
+    flex: 1;
+}
+
+.goal-input-group button {
+    white-space: nowrap;
+}
+
+.goal-percent {
+    text-align: center;
+    margin-top: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+#goalMessage {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #22c55e;
+}
+
+.goal-input-group input {
+    flex: 0 0 350px;
+}
+
+.progress-fill {
+    transition: width .6s ease, background .6s ease;
+}

@@ -112,3 +112,33 @@ function deleteTransaction(id) {
     document.getElementById("deleteModal").classList.add("active");
 
 }
+
+// ==========================
+// Savings Goal
+// ==========================
+
+function getGoal() {
+    return Number(localStorage.getItem("goal")) || 0;
+}
+
+function saveGoal(goal) {
+    localStorage.setItem("goal", goal);
+}
+
+function getCurrentSavings() {
+    return getIncome() - getTransactions().reduce(
+        (sum, item) => sum + Number(item.amount),
+        0
+    );
+}
+
+function getGoalPercentage() {
+    const goal = getGoal();
+
+    if (goal <= 0) return 0;
+
+    return Math.min(
+        Math.round((getCurrentSavings() / goal) * 100),
+        100
+    );
+}
