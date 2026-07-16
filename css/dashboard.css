@@ -83,6 +83,9 @@
     flex: 1;
     min-width: 0;
     padding: 35px;
+
+    height: 100vh;
+    overflow-y: auto;
 }
 
 

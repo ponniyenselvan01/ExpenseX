@@ -221,6 +221,9 @@ const transactionsMenu = document.getElementById("transactionsMenu");
 const goalsPage = document.getElementById("goalsPage");
 const goalsMenu = document.getElementById("goalsMenu");
 
+const calendarPage = document.getElementById("calendarPage");
+const calendarMenu = document.getElementById("calendarMenu");
+
 if (analyticsMenu) {
 
     analyticsMenu.addEventListener("click", function (e) {
@@ -228,12 +231,20 @@ if (analyticsMenu) {
         e.preventDefault();
 
         dashboardPage.style.display = "none";
-        analyticsPage.style.display = "flex";
+        analyticsPage.style.display = "block";
+        transactionsPage.style.display = "none";
+        goalsPage.style.display = "none";
+        calendarPage.style.display = "none";
+
         loadAnalytics();
+
         document.getElementById("pageTitle").textContent = "Analytics";
 
-        analyticsMenu.classList.add("active");
         dashboardMenu.classList.remove("active");
+        analyticsMenu.classList.add("active");
+        transactionsMenu.classList.remove("active");
+        goalsMenu.classList.remove("active");
+        calendarMenu.classList.remove("active");
 
     });
 
@@ -247,7 +258,10 @@ if (transactionsMenu) {
 
         dashboardPage.style.display = "none";
         analyticsPage.style.display = "none";
+        goalsPage.style.display = "none";
+        calendarPage.style.display = "none";
         transactionsPage.style.display = "block";
+        document.querySelector(".main-content").scrollTop = 0;
 
         document.getElementById("pageTitle").textContent = "Transactions";
         loadTransactionsPage();
@@ -265,13 +279,19 @@ if (dashboardMenu) {
 
         e.preventDefault();
 
+        dashboardPage.style.display = "flex";
         analyticsPage.style.display = "none";
         transactionsPage.style.display = "none";
-        dashboardPage.style.display = "flex";
+        goalsPage.style.display = "none";
+        calendarPage.style.display = "none";
+
         document.getElementById("pageTitle").textContent = "Dashboard";
 
         dashboardMenu.classList.add("active");
         analyticsMenu.classList.remove("active");
+        transactionsMenu.classList.remove("active");
+        goalsMenu.classList.remove("active");
+        calendarMenu.classList.remove("active");
 
     });
 
@@ -322,7 +342,9 @@ if (goalsMenu) {
         dashboardPage.style.display = "none";
         analyticsPage.style.display = "none";
         transactionsPage.style.display = "none";
+        calendarPage.style.display = "none";
         goalsPage.style.display = "block";
+        document.querySelector(".main-content").scrollTop = 0;
 
         document.getElementById("pageTitle").textContent = "Goals";
 
@@ -331,6 +353,33 @@ if (goalsMenu) {
         if (transactionsMenu) transactionsMenu.classList.remove("active");
 
         goalsMenu.classList.add("active");
+
+    });
+
+}
+
+if (calendarMenu) {
+
+    calendarMenu.addEventListener("click", function (e) {
+
+        e.preventDefault();
+
+        dashboardPage.style.display = "none";
+        analyticsPage.style.display = "none";
+        transactionsPage.style.display = "none";
+        goalsPage.style.display = "none";
+        calendarPage.style.display = "block";
+        document.querySelector(".main-content").scrollTop = 0;
+        loadCalendar();
+
+        document.getElementById("pageTitle").textContent = "Calendar";
+
+        if (dashboardMenu) dashboardMenu.classList.remove("active");
+        if (analyticsMenu) analyticsMenu.classList.remove("active");
+        if (transactionsMenu) transactionsMenu.classList.remove("active");
+        if (goalsMenu) goalsMenu.classList.remove("active");
+
+        calendarMenu.classList.add("active");
 
     });
 
