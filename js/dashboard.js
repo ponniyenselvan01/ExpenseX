@@ -142,7 +142,7 @@ function loadTransactionTable(transactions) {
 
         table.innerHTML = `
         
-        tr class="fade-in">
+        <tr class="fade-in">
             <td colspan="5" class="empty-state">
 
                 <div class="empty-box">
@@ -178,8 +178,7 @@ function loadTransactionTable(transactions) {
         table.innerHTML += `
 <tr class="fade-in">
     <td>🔥 ${item.category}</td>
-    <td><strong>₹${item.amount}</strong></td>
-    <td>${item.date}</td>
+<td><strong>${formatCurrency(item.amount)}</strong></td>    <td>${item.date}</td>
     <td>
         <span class="status completed">Completed</span>
     </td>
@@ -241,7 +240,7 @@ function updateDashboardStats(transactions) {
         totalBalance >= 0 ? "Positive" : "Negative";
 
     document.getElementById("budgetLeft").textContent =
-        `₹${Math.max(0, budgetLeft).toLocaleString()}`;
+        formatCurrency(Math.max(0, budgetLeft));
 
     document.getElementById("budgetPercent").textContent =
         `${budgetPercent}%`;

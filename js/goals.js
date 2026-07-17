@@ -13,11 +13,11 @@ function loadGoals() {
     const goalInput = document.getElementById("goalAmount");
     if (!currentSavings || !progress || !percentageText || !goalInput) return;
 
-    currentSavings.textContent = "₹" + savings.toLocaleString();
-    goalDisplay.textContent = "₹" + goal.toLocaleString();
+    currentSavings.textContent = formatCurrency(savings);
+    goalDisplay.textContent = formatCurrency(goal);
 
     remaining.textContent =
-        "₹" + Math.max(goal - savings, 0).toLocaleString();
+        formatCurrency(Math.max(goal - savings, 0));
 
     progress.style.width = percentage + "%";
     if (percentage >= 100) {
@@ -40,7 +40,7 @@ function loadGoals() {
 
     }
     goalInput.placeholder = goal
-        ? "Current Goal: ₹" + goal.toLocaleString()
+        ? "Current Goal: " + formatCurrency(goal)
         : "Enter Savings Goal";
 
     goalInput.value = "";

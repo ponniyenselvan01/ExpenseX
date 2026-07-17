@@ -1022,3 +1022,34 @@
     margin-top: 20px;
     backdrop-filter: blur(10px);
 }
+
+/* =========================
+        Settings Page
+========================= */
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 25px 0;
+}
+
+.setting-item label {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.setting-item select {
+    width: 240px;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 12px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 15px;
+    outline: none;
+}
+
+.setting-item button {
+    min-width: 220px;
+}

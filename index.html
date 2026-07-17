@@ -59,7 +59,7 @@
                     <span>Calendar</span>
                 </a>
 
-                <a href="#">
+                <a href="#" id="settingsMenu">
                     <i class="fa-solid fa-gear"></i>
                     <span>Settings</span>
                 </a>
@@ -670,6 +670,37 @@
                 </div> <!-- Close glass-card -->
 
             </section>
+            <section id="settingsPage" class="settings-page" style="display:none;">
+
+                <p class="page-subtitle">
+                    Customize your ExpenseX experience.
+                </p>
+                <div class="glass-card">
+
+                    <div class="setting-item">
+                        <label>Currency</label>
+
+                        <select id="currencySelect">
+                            <option value="₹">Indian Rupee (₹)</option>
+                            <option value="$">US Dollar ($)</option>
+                            <option value="€">Euro (€)</option>
+                            <option value="£">British Pound (£)</option>
+                        </select>
+                    </div>
+
+                    <hr>
+
+                    <div class="setting-item">
+                        <label>Theme</label>
+
+                        <button id="themeToggleBtn" class="primary-btn">
+                            Toggle Light / Dark
+                        </button>
+                    </div>
+
+                </div>
+
+            </section>
         </main>
 
     </div> <!-- app-container -->
@@ -827,8 +858,8 @@
     <script src="js/transactions.js"></script>
     <script src="js/goals.js"></script>
     <script src="js/calendar.js"></script>
+    <script src="js/settings.js"></script>
     <script src="js/app.js"></script>
-
 
 </body>
 

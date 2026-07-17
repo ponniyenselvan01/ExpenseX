@@ -9,8 +9,7 @@ function animateValue(elementId, start, end, duration = 800) {
     if (!element) return;
 
     if (duration <= 0) {
-        element.textContent = "₹" + end.toLocaleString();
-        return;
+        element.textContent = formatCurrency(end); return;
     }
 
     const range = end - start;
@@ -29,8 +28,7 @@ function animateValue(elementId, start, end, duration = 800) {
 
         const value = Math.floor(start + range * progress);
 
-        element.textContent = "₹" + value.toLocaleString();
-
+        element.textContent = formatCurrency(value);
         if (progress < 1) {
             requestAnimationFrame(update);
         }
@@ -78,5 +76,13 @@ function animateNumber(elementId, endValue, duration = 1000) {
     }
 
     requestAnimationFrame(update);
+
+}
+
+function formatCurrency(amount) {
+
+    const currency = localStorage.getItem("currency") || "₹";
+
+    return `${currency}${Number(amount).toLocaleString()}`;
 
 }

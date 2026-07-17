@@ -29,8 +29,7 @@ function loadTransactionsPage(search = "", category = "All") {
             <tr>
                 <td>${item.date}</td>
                 <td>${item.category}</td>
-                <td>₹${Number(item.amount).toLocaleString()}</td>
-                <td>${item.note}</td>
+formatCurrency(transaction.amount)                <td>${item.note}</td>
                 <td>
                     <button onclick="editTransaction(${item.id})">✏️</button>
                     <button onclick="deleteTransaction(${item.id})">🗑️</button>

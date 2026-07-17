@@ -10,13 +10,13 @@ function loadAnalytics() {
     });
 
     document.getElementById("analyticsTotalExpense").textContent =
-        "₹" + expense.toLocaleString();
+        formatCurrency(expense);
 
     document.getElementById("analyticsTotalIncome").textContent =
-        "₹" + income.toLocaleString();
+        formatCurrency(income);
 
     document.getElementById("analyticsTotalSavings").textContent =
-        "₹" + (income - expense).toLocaleString();
+        formatCurrency(income - expense);
 
     document.getElementById("analyticsTransactionCount").textContent =
         transactions.length;
@@ -60,10 +60,10 @@ function loadAnalytics() {
         highestCategory;
 
     document.getElementById("largestExpenseAnalytics").textContent =
-        "₹" + largestExpense.toLocaleString();
+        formatCurrency(largestExpense);
 
     document.getElementById("averageExpenseAnalytics").textContent =
-        "₹" + averageExpense.toLocaleString();
+        formatCurrency(averageExpense);
 
     document.getElementById("budgetUsedAnalytics").textContent =
         budgetUsed + "%";
