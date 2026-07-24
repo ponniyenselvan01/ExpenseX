@@ -572,8 +572,8 @@ function updateInsights(transactions) {
 
     // Total Spent
     list.innerHTML += `
-        <li>💰 Total Spent: <strong>₹${totalExpense.toLocaleString()}</strong></li>
-    `;
+    <li>💰 Total Spent: <strong>${formatCurrency(totalExpense)}</strong></li>
+`;
 
     // Highest Category
     list.innerHTML += `
@@ -609,8 +609,8 @@ function updateInsights(transactions) {
     const remaining = budget - totalExpense;
 
     list.innerHTML += `
-        <li>💵 Budget Remaining: <strong>₹${Math.max(0, remaining).toLocaleString()}</strong></li>
-    `;
+    <li>💵 Budget Remaining: <strong>${formatCurrency(Math.max(0, remaining))}</strong></li>
+`;
 
 }
 function updateAnalyticsCards(transactions) {
@@ -824,10 +824,10 @@ function updateMonthlyComparison(transactions) {
 
     if (!currentMonthExpense || !previousMonthExpense) return;
     currentMonthExpense.textContent =
-        `₹${currentTotal.toLocaleString()}`;
+        formatCurrency(currentTotal);
 
     previousMonthExpense.textContent =
-        `₹${previousTotal.toLocaleString()}`;
+        formatCurrency(previousTotal);
 
     const message =
         document.getElementById("comparisonMessage");
@@ -852,14 +852,14 @@ function updateMonthlyComparison(transactions) {
     if (difference > 0) {
 
         message.innerHTML =
-            `📈 Spending increased by <strong>₹${difference.toLocaleString()}</strong> (${percent}%).`;
+            `📈 Spending increased by <strong>${formatCurrency(difference)}</strong> (${percent}%).`;
 
     }
 
     else if (difference < 0) {
 
         message.innerHTML =
-            `📉 Spending decreased by <strong>₹${Math.abs(difference).toLocaleString()}</strong> (${Math.abs(percent)}%).`;
+            `📉 Spending decreased by <strong>${formatCurrency(Math.abs(difference))}</strong> (${Math.abs(percent)}%).`;
 
     }
 

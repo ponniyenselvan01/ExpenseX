@@ -387,8 +387,8 @@ progress {
 
     border-radius: 20px;
 
-    overflow: hidden;
-
+    overflow-x: auto;
+    overflow-y: visible;
 }
 
 thead {

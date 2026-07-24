@@ -1,0 +1,94 @@
+/* ============================
+   Transactions - Mobile
+============================ */
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.transactions-table {
+    min-width: 700px;
+}
+
+@media (max-width:768px) {
+
+    .transactions-table th:nth-child(4),
+    .transactions-table td:nth-child(4) {
+        display: none;
+    }
+
+}
+
+@media (max-width:1024px) {
+
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        padding: 20px;
+    }
+
+    .main-content {
+        width: 100%;
+        padding: 20px;
+        height: auto;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .budget-card {
+        grid-column: auto;
+    }
+
+    .transaction-card {
+        overflow-x: auto;
+    }
+
+    .transactions-table {
+        min-width: 700px;
+    }
+
+    .fab {
+        width: 50px;
+        height: 50px;
+        right: 12px;
+        bottom: 12px;
+        font-size: 20px;
+    }
+
+    .transactions-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .transactions-toolbar input,
+    .transactions-toolbar select,
+    .transactions-toolbar button {
+        width: 100%;
+    }
+
+    .transactions-toolbar {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .transactions-toolbar input,
+    .transactions-toolbar select,
+    .transactions-toolbar button {
+        width: 100%;
+    }
+
+}

@@ -169,3 +169,84 @@ body::after {
     }
 
 }
+
+/* =========================================
+   Tablet
+========================================= */
+
+@media (max-width:1024px) {
+
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-radius: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .dashboard-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .left-column,
+    .right-column {
+        width: 100%;
+    }
+
+    .chart-card,
+    .transaction-card,
+    .top-expenses,
+    .budget-card,
+    .monthly-comparison,
+    .health-card {
+        width: 100%;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .stat-card {
+        width: 100%;
+    }
+
+}
+
+@media (max-width:768px) {
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .top-actions {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+}
